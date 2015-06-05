@@ -28,6 +28,10 @@ function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
       url: '/home',
       templateUrl: 'modules/core/views/home.client.view.html'
     })
+    .state('app.events', {
+      url: '/events',
+      templateUrl: 'modules/events/views/list-events.client.view.html'
+    })
     // 
     // CUSTOM RESOLVES
     //   Add your own resolves properties

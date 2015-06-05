@@ -1,0 +1,22 @@
+<h3>
+	<div class="pull-right" data-ng-show="authentication.user._id == event.user._id">
+		<a class="btn btn-primary" href="/#!/events/{{event._id}}/edit">
+			<i class="fa fa-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="fa fa-trash"></i>
+		</a>
+	</div>
+	{{event.title}}
+</h3>
+<section data-ng-init="findOne()">
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="event.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="event.user.displayName"></span>
+		</em>
+	</small>
+	<p class="lead" data-ng-bind="event.content"></p>
+</section>

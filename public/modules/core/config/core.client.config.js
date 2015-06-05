@@ -7,6 +7,9 @@ angular.module('core').run(['Menus',
     // Add default menu entry
     Menus.addMenuItem('sidebar', 'Home', 'home', null, '/home', true, null, null, 'icon-home');
 
+    // Add dashboard menu entry
+    Menus.addMenuItem('sidebar', 'Events', 'events', null, '/events', true, null, null, 'icon-note');
+
   }
 ]).config(['$ocLazyLoadProvider', 'APP_REQUIRES', function ($ocLazyLoadProvider, APP_REQUIRES) {
   // Lazy Load modules configuration
