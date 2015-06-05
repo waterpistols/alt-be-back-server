@@ -1,0 +1,39 @@
+<h3>New Activity</h3>
+<section data-ng-controller="ActivitiesController">
+	<div class="col-md-12">
+		<form name="activityForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error': activityForm.name.$dirty && activityForm.name.$invalid }">
+					<label class="control-label" for="name">Name</label>
+					<div class="controls">
+						<input name="name" type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name">
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': activityForm.actionLabel.$dirty && activityForm.actionLabel.$invalid }">
+					<label class="control-label" for="actionLabel">Action Label</label>
+					<div class="controls">
+						<input name="actionLabel" type="text" data-ng-model="actionLabel" id="actionLabel" class="form-control" placeholder="Action Label">
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': activityForm.points.$dirty && activityForm.points.$invalid }">
+					<label class="control-label" for="points">Points</label>
+					<div class="controls">
+						<input name="points" type="text" data-ng-model="points" id="points" class="form-control" placeholder="Points">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="description">Description</label>
+					<div class="controls">
+						<textarea name="description" data-ng-model="description" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
+					</div>
+				</div>
+				<div class="form-group mt">
+					<input type="submit" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

@@ -1,0 +1,51 @@
+<h3>Edit Activity</h3>
+<section data-ng-controller="ActivitiesController" data-ng-init="findOne()">
+	<div class="col-md-12">
+		<form name="activityForm" class="form-horizontal" data-ng-submit="update(activityForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && activityForm.name.$invalid}">
+					<label class="control-label" for="name">Name</label>
+					<div class="controls">
+						<input name="name" type="text" data-ng-model="activity.name" id="name" class="form-control" placeholder="Name" required>
+					</div>
+					<div ng-show="submitted && activityForm.name.$invalid" class="help-block">
+						<p ng-show="activityForm.name.$error.required" class="text-danger">Name is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && activityForm.actionLabel.$invalid}">
+					<label class="control-label" for="name">Action Label</label>
+					<div class="controls">
+						<input name="actionLabel" type="text" data-ng-model="activity.actionLabel" id="actionLabel" class="form-control" placeholder="Action Label" required>
+					</div>
+					<div ng-show="submitted && activityForm.actionLabel.$invalid" class="help-block">
+						<p ng-show="activityForm.actionLabel.$error.required" class="text-danger">Action Label is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && activityForm.points.$invalid}">
+					<label class="control-label" for="points">Points</label>
+					<div class="controls">
+						<input name="points" type="text" data-ng-model="activity.points" id="points" class="form-control" placeholder="Points" required>
+					</div>
+					<div ng-show="submitted && activityForm.points.$invalid" class="help-block">
+						<p ng-show="activityForm.points.$error.required" class="text-danger">Points is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && activityForm.description.$invalid}">
+					<label class="control-label" for="description">Description</label>
+					<div class="controls">
+						<textarea name="description" data-ng-model="activity.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description" required></textarea>
+					</div>
+					<div ng-show="submitted && activityForm.description.$invalid" class="help-block">
+						<p ng-show="activityForm.description.$error.required" class="text-danger">Description is required</p>
+					</div>
+				</div>
+				<div class="form-group mt">
+					<input type="submit" value="Update" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
