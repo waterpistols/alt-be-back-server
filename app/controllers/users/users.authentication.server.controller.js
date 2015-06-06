@@ -91,7 +91,7 @@ exports.oauthCallback = function(strategy) {
 					return res.redirect('/#!/login');
 				}
 
-				return res.redirect(redirectURL || '/#!/events');
+				return res.redirect(redirectURL || '/#!/dashboard');
 			});
 		})(req, res, next);
 	};
