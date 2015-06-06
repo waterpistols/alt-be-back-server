@@ -18,7 +18,8 @@ module.exports = function(app) {
 		// .put(users.requiresLogin, members.hasAuthorization, members.update)
 		.put(members.update)
 		.delete(users.requiresLogin, members.hasAuthorization, members.delete);
-
+	app.route('/members/import')
+		.post(members.import);
 	// Finish by binding the member middleware
 	app.param('memberId', members.memberByID);
 };

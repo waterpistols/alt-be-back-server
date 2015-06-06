@@ -47,13 +47,14 @@ module
     })
 
 
-    .factory('FileUploader', ['fileUploaderOptions', '$rootScope', '$http', '$window', '$compile',
+    .factory('FileUploader', ['fileUploaderOptions', '$rootScope', '$http', '$window', '$compile',        
         function(fileUploaderOptions, $rootScope, $http, $window, $compile) {
             /**
              * Creates an instance of FileUploader
              * @param {Object} [options]
              * @constructor
              */
+            console.log($window);
             function FileUploader(options) {
                 var settings = angular.copy(fileUploaderOptions);
                 angular.extend(this, settings, options, {

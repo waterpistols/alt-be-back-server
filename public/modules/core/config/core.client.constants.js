@@ -42,7 +42,7 @@ angular.module('core')
     },
     // Angular based script (use the right module name)
     modules: [
-      // { name: 'toaster', files: ['/lib/angularjs-toaster/toaster.js','/lib/angularjs-toaster/toaster.css'] }
+      {name: 'angularFileUpload',         files: ['/lib/angular-file-upload/angular-file-upload.js']},
     ]
 
   })

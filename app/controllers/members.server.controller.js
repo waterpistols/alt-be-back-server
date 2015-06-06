@@ -107,3 +107,11 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+/**
+ * Member import middleware
+ */
+exports.import = function(req, res, next) {
+	
+	res.json({'msg':'da'});
+};

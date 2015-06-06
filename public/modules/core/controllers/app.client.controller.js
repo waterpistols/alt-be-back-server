@@ -6,8 +6,7 @@
 angular.module('core').controller('AppController',
   ['$rootScope', '$scope', '$state', '$translate', '$window', '$localStorage', '$timeout', 'toggleStateService', 'colors', 'browser', 'cfpLoadingBar', 'Authentication',
   function($rootScope, $scope, $state, $translate, $window, $localStorage, $timeout, toggle, colors, browser, cfpLoadingBar, Authentication) {
-    "use strict";
-
+    "use strict";    
     // This provides Authentication context.
     $scope.authentication = Authentication;
 
