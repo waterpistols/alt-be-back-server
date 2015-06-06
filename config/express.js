@@ -25,7 +25,13 @@ var fs = require('fs'),
 
 module.exports = function(db) {
 	// Initialize express app
-	var app = express();
+	var app = express(),
+		allowCrossDomain = function(req, res, next) {
+    		res.header('Access-Control-Allow-Origin', '*');
+    		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    		res.header('Access-Control-Allow-Headers', 'Content-Type');
+    		next();
+		};
 
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
@@ -79,6 +85,7 @@ module.exports = function(db) {
 	app.use(bodyParser.urlencoded({
 		extended: true
 	}));
+	app.use(allowCrossDomain);
 	app.use(bodyParser.json());
 	app.use(methodOverride());
 

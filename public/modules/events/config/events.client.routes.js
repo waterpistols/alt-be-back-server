@@ -13,19 +13,41 @@ angular.module('events').config(['$stateProvider', 'RouteHelpersProvider',
 			}).
 			state('app.createEvent', {
 				url: '/events/create',
-				templateUrl: 'modules/events/views/create-event.client.view.html',
-				controller: 'EventsController',				
+				views: {
+					'': {
+						templateUrl: 'modules/events/views/create-event.client.view.html',
+						controller: 'EventsController',
+					},
+					'form@app.createEvent': {
+						templateUrl: 'modules/events/views/form-event.client.view.html',
+					}
+				},				
 				authenticate: true
 			}).
 			state('app.viewEvent', {
 				url: '/events/:eventId',
-				templateUrl: 'modules/events/views/view-event.client.view.html',
-				controller: 'EventsController',
+				views: {
+					'': {
+						templateUrl: 'modules/events/views/view-event.client.view.html',
+						controller: 'EventsController',		
+					},
+					'form@app.viewEvent': {
+						templateUrl: 'modules/events/views/form-event.client.view.html',	
+					}
+				},
 				authenticate: true
 			}).
 			state('app.editEvent', {
 				url: '/events/:eventId/edit',
-				templateUrl: 'modules/events/views/edit-event.client.view.html',
+				views: {
+					'': {
+						templateUrl: 'modules/events/views/edit-event.client.view.html',
+						controller: 'EventsController',
+					},
+					'form@app.editEvent': {
+						templateUrl: 'modules/events/views/form-event.client.view.html',		
+					}
+				},
 				authenticate: true
 			});
 	}

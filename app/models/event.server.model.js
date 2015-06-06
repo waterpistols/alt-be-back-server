@@ -42,7 +42,7 @@ var EventSchema = new Schema({
 	image: {
 		type: String,
 		trim: true,
-		required: 'Image cannot be blank'
+		// required: 'Image cannot be blank'
 	},
 	startDate: {
 		type: Date,
@@ -74,7 +74,7 @@ var EventSchema = new Schema({
 	},
 	repeat: {
 		type: String,
-		default: ''
+		default: 'no'
 	},
 	location: {
 		type: String,

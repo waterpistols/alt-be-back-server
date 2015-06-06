@@ -43,6 +43,8 @@ angular.module('core')
     // Angular based script (use the right module name)
     modules: [
       {name: 'angularFileUpload',         files: ['/lib/angular-file-upload/angular-file-upload.js']},
+      {name: 'monospaced.qrcode',         files: ['/lib/angular-qrcode/qrcode.js']},
+      {name: 'qrcode',                    files: ['/lib/bower-qrcode-generator/js/qrcode.js']},
     ]
 
   })

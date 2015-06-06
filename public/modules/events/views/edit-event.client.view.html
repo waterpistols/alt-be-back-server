@@ -1,33 +1,28 @@
-<h3>Edit Event</h3>
-<section data-ng-controller="EventsController" data-ng-init="findOne()">
-	<div class="col-md-12">
-		<form name="eventForm" class="form-horizontal" data-ng-submit="update(eventForm.$valid)" novalidate>
-			<fieldset>
-				<div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.title.$invalid}">
-					<label class="control-label" for="title">Title</label>
-					<div class="controls">
-						<input name="title" type="text" data-ng-model="event.title" id="title" class="form-control" placeholder="Title" required>
-					</div>
-					<div ng-show="submitted && eventForm.title.$invalid" class="help-block">
-						<p ng-show="eventForm.title.$error.required" class="text-danger">Title is required</p>
-					</div>
-				</div>
-				<div class="form-group" ng-class="{ 'has-error' : submitted && eventForm.content.$invalid}">
-					<label class="control-label" for="content">Content</label>
-					<div class="controls">
-						<textarea name="content" data-ng-model="event.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
-					</div>
-					<div ng-show="submitted && eventForm.content.$invalid" class="help-block">
-						<p ng-show="eventForm.content.$error.required" class="text-danger">Content is required</p>
-					</div>
-				</div>
-				<div class="form-group mt">
-					<input type="submit" value="Update" class="btn btn-default">
-				</div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
-		</form>
+<h3>
+	Edit Event
+	<button type="button" class="btn btn-labeled btn-default pull-right" ui-sref="app.listEvents">
+       	<span class="btn-label">
+       		<i class="fa fa-arrow-left"></i>
+       	</span>
+       	Back
+   </button>
+</h3>
+
+<section data-ng-init="findOne()">
+	<div class="panel panel-default ng-scope">
+		<div class="panel-body">
+	  		<form name="eventForm" class="form-horizontal" novalidate>
+		        
+		        <div ui-view="form"></div>
+
+				<fieldset>
+		            <div class="form-group">
+		               <div class="col-sm-4 col-sm-offset-2">
+		                  <button type="submit" ng-click="update()" class="btn btn-primary">Save changes</button>
+		               </div>
+		            </div>
+	         	</fieldset>
+		  </form>
+		</div>
 	</div>
 </section>

@@ -6,7 +6,7 @@ angular.module('events').controller('EventsController', [
   '$location', 
   '$timeout', 
   'Authentication' , 
-  'FileUploader', 
+  'FileUploader',
   'Events',
   function($scope, $stateParams, $location, $timeout, Authentication, FileUploader, Events) {
     
@@ -16,16 +16,19 @@ angular.module('events').controller('EventsController', [
     //     url: 'server/upload.php'
     // });
 
-    $scope.create = function() {
-      var event = new Events({
-        title: this.title,
-        content: this.content
-      });
-      event.$save(function(response) {
-        $location.path('events/' + response._id);
+    $scope.event = new Events({
+      repeat: 'no',
+      active: true
+    });
 
-        $scope.title = '';
-        $scope.content = '';
+    $scope.create = function() {
+      
+      $scope.event.$save(function(response) {
+        console.log(response);
+      //   $location.path('events/' + response._id);
+
+      //   $scope.title = '';
+      //   $scope.content = '';
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -57,12 +60,42 @@ angular.module('events').controller('EventsController', [
       });
     };        
 
+
+    // View
+    $scope.qrOptions = {
+      data: 1,
+      version: 2,
+      errorCorrectionLevel: 'M',
+      size: 200 // px size
+    };
+
+    $scope.printQR = function() {
+      var dataUrl = document.getElementsByTagName('canvas')[0].toDataURL();
+      var windowContent = ['<!DOCTYPE html>',
+        '<html>',
+        '<head><title>Print QR Code</title></head>',
+        '<body>',
+        '<img src="' + dataUrl + '">',
+        '</body>',
+        '</html>'
+      ].join('');
+
+      var printWin = window.open('','','width=800,height=600');
+      printWin.document.open();
+      printWin.document.write(windowContent);
+      printWin.document.close();
+      printWin.focus();
+      printWin.print();
+      printWin.close();
+    }
+     
     $scope.findOne = function() {
       $scope.event = Events.get({
         eventId: $stateParams.eventId
       });
     };
 
+    // List
     $timeout(function(){
       var eventsTable;  
 
@@ -72,8 +105,6 @@ angular.module('events').controller('EventsController', [
         'paging':   true,  // Table pagination
         'ordering': true,  // Column ordering 
         'info':     true,  // Bottom left status text        
-        // Text translation options
-        // Note the required keywords between underscores (e.g _MENU_)
         oLanguage: {
           sSearch:      'Search: ',
           sLengthMenu:  '_MENU_ records per page',
@@ -97,7 +128,19 @@ angular.module('events').controller('EventsController', [
           editAction   = '<a style="display:inline; margin-right: 2px;" class="btn btn-primary" href="' + editRoute + '"><i class="fa fa-edit"></i></a>';
           removeAction = '<a style="display:inline" class="btn btn-danger" data-ng-click="remove();"><i class="fa fa-trash"></i></a>';
           action += editAction + removeAction + '</div>';
-          data[key] = [value.title, value.content, action];
+          
+          data[key] = [
+            value.created,
+            '-',
+            '<a href="#!/events/' + value._id + '">' + value.title + '</a>',
+            value.points,
+            value.attending.length,
+            value.location,
+            value.active, 
+            action
+          ];
+
+          console.log(data)
         });
         
         if (data.length) {
