@@ -7,6 +7,7 @@ angular.module('signin').config(['$stateProvider',
 		$stateProvider.
 			
 			state('blank.signin', {
+				url: '/signin',
 				controller: 'SignInController',
 				templateUrl: 'modules/signin/views/signin.client.view.html',
 			})

@@ -32,10 +32,7 @@ function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
 
     .state('blank', {
       abstract: true,
-      templateUrl: 'modules/core/views/blank.client.view.html',
-      controller: ["$rootScope", function($rootScope) {
-        $rootScope.app.layout.isBoxed = false;
-      }]      
+      templateUrl: 'modules/core/views/blank.client.view.html'      
     })
     
     // 

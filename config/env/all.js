@@ -13,6 +13,7 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
+				'public/lib/simple-line-icons/css/simple-line-icons.css'
 				// 'public/lib/bootstrap/dist/css/bootstrap.css',
 				// 'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 			],
@@ -35,7 +36,8 @@ module.exports = {
 				'public/lib/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
 				'public/lib/oclazyload/dist/ocLazyLoad.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'public/lib/angular-loading-bar/build/loading-bar.js'
+				'public/lib/angular-loading-bar/build/loading-bar.js',
+
 				// 'public/lib/jquery/dist/jquery.js',
 				// 'public/lib/angular/angular.js',
 				// 'public/lib/angular-resource/angular-resource.js',

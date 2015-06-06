@@ -14,8 +14,8 @@ module.exports = {
 		title: 'Angle - Development Environment'
 	},
 	facebook: {
-		clientID: process.env.FACEBOOK_ID || 'APP_ID',
-		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+		clientID: process.env.FACEBOOK_ID || '899522973447475',
+		clientSecret: process.env.FACEBOOK_SECRET || 'cda57e2b3344ffda8d4d45fe88289fcd',
 		callbackURL: '/auth/facebook/callback'
 	},
 	twitter: {
