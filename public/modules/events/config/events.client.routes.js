@@ -1,8 +1,8 @@
 'use strict';
 
 // Setting up route
-angular.module('events').config(['$stateProvider',
-	function($stateProvider) {
+angular.module('events').config(['$stateProvider', 'RouteHelpersProvider',
+	function($stateProvider, helper) {
 		// Articles state routing
 		$stateProvider.
 			state('app.listEvents', {
@@ -14,6 +14,7 @@ angular.module('events').config(['$stateProvider',
 			state('app.createEvent', {
 				url: '/events/create',
 				templateUrl: 'modules/events/views/create-event.client.view.html',
+				controller: 'EventsController',				
 				authenticate: true
 			}).
 			state('app.viewEvent', {

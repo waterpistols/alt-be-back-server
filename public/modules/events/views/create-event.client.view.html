@@ -1,27 +1,160 @@
-<h3>New Event</h3>
-<section data-ng-controller="EventsController">
-	<div class="col-md-12">
-		<form name="eventForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+<h3>
+	New Event
+	<button type="button" class="btn btn-labeled btn-default pull-right" ui-sref="app.listEvents">
+       	<span class="btn-label">
+       		<i class="fa fa-arrow-left"></i>
+       	</span>
+       	Back
+   </button>
+</h3>
+
+<section>
+	<div class="panel panel-default ng-scope">
+		<div class="panel-body">
+	  		<form name="eventForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+	        <legend>Event Details</legend>
+	        <fieldset>
+	        	<div class="form-group" ng-class="{ 'has-error': eventForm.title.$dirty && eventForm.title.$invalid }">
+		        	<label class="col-sm-2 control-label">Title</label>
+		           	<div class="col-sm-10">
+		              	<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
+		           	</div>
+				</div>
+	        </fieldset>
+
+	        <fieldset>
+	        	<div class="form-group">
+	        		<label class="col-sm-2 control-label">Cover Image</label>
+	        		<div class="col-sm-10">
+		        		<div class="bootstrap-filestyle input-group">
+		        			<input type="text" class="form-control" disabled=""> 
+		        			<span class="group-span-filestyle input-group-btn" tabindex="0">
+		        				<label for="filestyle-1" class="btn btn-default ">
+		        					<span class="glyphicon glyphicon-folder-open"></span> 
+		        					Single
+		        				</label>
+		        			</span>
+		        		</div>
+	        		</div>
+              	</div>	
+	        </fieldset>
+	        
+	        <fieldset>
+	        	<div class="form-group">
+					<label class="col-sm-2 control-label">Content</label>
+		           	<div class="col-sm-10">
+		              	<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+		           	</div>
+				</div>
+	        </fieldset>
+
+	        <fieldset>
+	        	<div class="form-group" ng-class="{ 'has-error': eventForm.title.$dirty && eventForm.title.$invalid }">
+		        	<label class="col-sm-2 control-label">Location</label>
+		           	<div class="col-sm-10">
+		              	<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Location" required>
+		           	</div>
+				</div>
+	        </fieldset>
+
+	        <fieldset>
+		        <div class="form-group">
+		           <label class="col-sm-2 control-label">Start Date</label>
+		           <div class="col-sm-10">
+		              <div class="row">
+		                 <div class="col-md-2">
+		                    <input type="text" data-inputmask="'mask': '99/99/9999'" class="form-control">
+		                 </div>
+		                 <div class="col-md-1">
+		                    <label class="control-label">End Date</label>
+		                 </div>
+		                 <div class="col-md-2">
+		                    <input type="text" data-inputmask="'mask': '99/99/9999'" class="form-control">
+		                 </div>
+		              </div>
+		           </div>
+		        </div>
+	     	</fieldset>
+
+	     	<fieldset>
+	     		<div class="form-group">
+	               	<label class="col-sm-2 control-label">Repeat</label>
+               		<div class="col-sm-10">
+                  		<div class="radio">
+	                     	<label>
+		                        <input id="optionsRadios1" type="radio" name="optionsRadios" value="option1" checked="true">
+		                        No
+		                    </label>
+	                  	</div>
+	                  	<div class="radio">
+		                    <label>
+		                        <input id="optionsRadios1" type="radio" name="optionsRadios" value="option2">
+		                        Daily
+		                    </label>
+	                  	</div>
+	                  	<div class="radio">
+	                    	<label>
+	                        	<input id="optionsRadios2" type="radio" name="optionsRadios" value="option3">
+	                        	Weekly
+	                        </label>
+	                  	</div>
+	               	</div>
+	            </div>
+	     	</fieldset>
+
+	     	<fieldset>
+		        <div class="form-group">
+		           <label class="col-sm-2 control-label">Points</label>
+		           <div class="col-sm-10">
+		              <div class="row">
+		                 <div class="col-md-2">
+		                    <input type="text" placeholder="0" class="form-control">
+		                 </div>
+		              </div>
+		           </div>
+		        </div>
+	     	</fieldset>
+
+	     	<fieldset>
+		        <div class="form-group">
+		           <label class="col-sm-2 control-label">QR</label>
+		           <div class="col-sm-10">
+		              <div class="row">
+		                 <div class="col-md-2">
+		                    <input type="text" placeholder="0" class="form-control">
+		                 </div>
+		              </div>
+		           </div>
+		        </div>
+	     	</fieldset>
+
+	     	<fieldset>
+	     		<div class="form-group">
+              		<div class="col-lg-offset-2 col-lg-10">
+                 		<div class="checkbox c-checkbox">
+                        	<label>
+                       			<input type="checkbox" checked="">
+                           		<span class="fa fa-check"></span>Active
+                           	</label>
+                     	</div>
+              		</div>
+               	</div>
+	     	</fieldset>
+			
 			<fieldset>
-				<div class="form-group" ng-class="{ 'has-error': eventForm.title.$dirty && eventForm.title.$invalid }">
-					<label class="control-label" for="title">Title</label>
-					<div class="controls">
-						<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="content">Content</label>
-					<div class="controls">
-						<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
-					</div>
-				</div>
-				<div class="form-group mt">
-					<input type="submit" class="btn btn-default">
-				</div>
+	            <div class="form-group">
+	               <div class="col-sm-4 col-sm-offset-2">
+	                  <button type="submit" class="btn btn-primary">Save changes</button>
+	               </div>
+	            </div>
+         	</fieldset>	
+			
+			</fieldset>	
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
-			</fieldset>
-		</form>
+		     </fieldset>
+		  </form>
+		</div>
 	</div>
 </section>

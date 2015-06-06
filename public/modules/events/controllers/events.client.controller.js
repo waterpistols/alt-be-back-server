@@ -1,8 +1,20 @@
 'use strict';
 
-angular.module('events').controller('EventsController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', 'Events',
-  function($scope, $stateParams, $location, $timeout, Authentication, Events) {
+angular.module('events').controller('EventsController', [
+  '$scope', 
+  '$stateParams', 
+  '$location', 
+  '$timeout', 
+  'Authentication' , 
+  'FileUploader', 
+  'Events',
+  function($scope, $stateParams, $location, $timeout, Authentication, FileUploader, Events) {
+    
     $scope.authentication = Authentication;
+
+    // $scope.uploader = new FileUploader({
+    //     url: 'server/upload.php'
+    // });
 
     $scope.create = function() {
       var event = new Events({
@@ -63,7 +75,7 @@ angular.module('events').controller('EventsController', ['$scope', '$stateParams
         // Text translation options
         // Note the required keywords between underscores (e.g _MENU_)
         oLanguage: {
-          sSearch:      'Search all columns:',
+          sSearch:      'Search: ',
           sLengthMenu:  '_MENU_ records per page',
           info:         'Showing page _PAGE_ of _PAGES_',
           zeroRecords:  'Nothing found - sorry',
