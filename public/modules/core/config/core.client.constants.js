@@ -38,13 +38,16 @@ angular.module('core')
       'datatables-pugins':  ['/vendor/datatable-bootstrap/js/dataTables.bootstrap.js',
                              '/vendor/datatable-bootstrap/js/dataTables.bootstrapPagination.js',
                              '/lib/datatables-colvis/js/dataTables.colVis.js',
-                             '/lib/datatables-colvis/css/dataTables.colVis.css']
+                             '/lib/datatables-colvis/css/dataTables.colVis.css'],
+      'inputmask':           ['/lib/jquery.inputmask/dist/jquery.inputmask.bundle.min.js'],
+      'moment':              ['/lib/moment/min/moment.min.js'],
     },
     // Angular based script (use the right module name)
     modules: [
       {name: 'angularFileUpload',         files: ['/lib/angular-file-upload/angular-file-upload.js']},
       {name: 'monospaced.qrcode',         files: ['/lib/angular-qrcode/qrcode.js']},
       {name: 'qrcode',                    files: ['/lib/bower-qrcode-generator/js/qrcode.js']},
+      
     ]
 
   })

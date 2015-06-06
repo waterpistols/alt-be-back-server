@@ -2,13 +2,14 @@
 
 angular.module('events').controller('EventsController', [
   '$scope', 
+  '$state', 
   '$stateParams', 
   '$location', 
   '$timeout', 
   'Authentication' , 
   'FileUploader',
   'Events',
-  function($scope, $stateParams, $location, $timeout, Authentication, FileUploader, Events) {
+  function($scope, $state, $stateParams, $location, $timeout, Authentication, FileUploader, Events) {
     
     $scope.authentication = Authentication;
 
@@ -16,50 +17,35 @@ angular.module('events').controller('EventsController', [
     //     url: 'server/upload.php'
     // });
 
+    // Create
     $scope.event = new Events({
       repeat: 'no',
       active: true
     });
 
     $scope.create = function() {
-      
       $scope.event.$save(function(response) {
-        console.log(response);
-      //   $location.path('events/' + response._id);
-
-      //   $scope.title = '';
-      //   $scope.content = '';
+        $state.go('app.listEvents');
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });
     };
 
-    $scope.remove = function(event) {
-      if (event) {
-        event.$remove();
-
-        for (var i in $scope.events) {
-          if ($scope.events[i] === event) {
-            $scope.events.splice(i, 1);
-          }
-        }
-      } else {
-        $scope.event.$remove(function() {
-          $location.path('events');
-        });
-      }
+    // Remove
+    $scope.remove = function() {
+      $scope.event.$remove(function() {
+        $state.go('app.listEvents');
+      });
     };
 
+    // Update
     $scope.update = function() {
-      var event = $scope.event;
-
-      event.$update(function() {
-        $location.path('events/' + event._id);
+      $scope.event.$update(function() {
+        $state.go('app.viewEvent', { eventId: $scope.event._id})
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });
-    };        
-
+    };
 
     // View
     $scope.qrOptions = {
@@ -88,10 +74,17 @@ angular.module('events').controller('EventsController', [
       printWin.print();
       printWin.close();
     }
-     
-    $scope.findOne = function() {
-      $scope.event = Events.get({
+
+    $scope.findOne = function(disabled) {
+      if(typeof(disabled) !== 'undefined') {
+        $scope.viewPage = true;
+      }
+      Events.get({
         eventId: $stateParams.eventId
+      }, function(response) {
+        $scope.event = response;
+        $scope.startDate = moment(response.startDate).format('DD/MM/YYYY HH:MM');
+        $scope.endDate = moment(response.endDate).format('DD/MM/YYYY HH:MM');
       });
     };
 
@@ -126,11 +119,10 @@ angular.module('events').controller('EventsController', [
           action = '<div class="pull-left">';
           editRoute    = '#!/events/' + value._id + '/edit';
           editAction   = '<a style="display:inline; margin-right: 2px;" class="btn btn-primary" href="' + editRoute + '"><i class="fa fa-edit"></i></a>';
-          removeAction = '<a style="display:inline" class="btn btn-danger" data-ng-click="remove();"><i class="fa fa-trash"></i></a>';
-          action += editAction + removeAction + '</div>';
+          action += editAction + '</div>';
           
           data[key] = [
-            value.created,
+            moment(value.created).format('DD/MM/YYYY HH:mm'),
             '-',
             '<a href="#!/events/' + value._id + '">' + value.title + '</a>',
             value.points,
@@ -139,8 +131,6 @@ angular.module('events').controller('EventsController', [
             value.active, 
             action
           ];
-
-          console.log(data)
         });
         
         if (data.length) {

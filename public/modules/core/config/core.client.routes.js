@@ -23,7 +23,7 @@ angular.module('core')
           // url: '/',
           abstract: true,
           templateUrl: 'modules/core/views/core.client.view.html',
-          resolve: helper.resolveFor('modernizr', 'icons', 'datatables', 'datatables-pugins', 'angularFileUpload', 'monospaced.qrcode', 'qrcode'),
+          resolve: helper.resolveFor('modernizr', 'icons', 'datatables', 'datatables-pugins', 'angularFileUpload', 'monospaced.qrcode', 'qrcode', 'inputmask', 'moment'),
         })
         
         .state('app.home', {
