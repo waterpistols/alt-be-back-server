@@ -1,4 +1,7 @@
-<h3>Events</h3>
+<h3>Events
+<a class="pull-right mb-sm btn btn-primary" data-ng-href="#!/events/create">New Event</a>
+</h3>
+
 <div ng-controller="EventsController" class="container-fluid">
 	<div class="row">
       <div class="col-lg-12">
@@ -12,6 +15,7 @@
                      <tr>
                         <th class="sort-alpha">Title</th>
                         <th class="sort-alpha">Content</th>                     
+                        <th>Action</th>
                      </tr>
                   </thead>
                   <tbody>                                 
@@ -23,7 +27,8 @@
                         </th>
                         <th>
                            <input type="text" name="filter_content" placeholder="Filter Content" class="form-control input-sm datatable_input_col_search" />
-                        </th>                        
+                        </th>
+                        <th></th>                        
                      </tr>
                   </tfoot>
                </table>

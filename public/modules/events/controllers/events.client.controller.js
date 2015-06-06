@@ -73,9 +73,19 @@ angular.module('events').controller('EventsController', ['$scope', '$stateParams
       });
       
       $scope.events = Events.query(function(items) {
-        var data = [];
+        var data       = [];
+        var editRoute  = '';
+        var editAction = '';
+        var removeAction = '';
+        var action = '';
+
         angular.forEach(items, function(value, key) {
-          data[key] = [value.title, value.content];
+          action = '<div class="pull-left">';
+          editRoute    = '#!/events/' + value._id + '/edit';
+          editAction   = '<a style="display:inline; margin-right: 2px;" class="btn btn-primary" href="' + editRoute + '"><i class="fa fa-edit"></i></a>';
+          removeAction = '<a style="display:inline" class="btn btn-danger" data-ng-click="remove();"><i class="fa fa-trash"></i></a>';
+          action += editAction + removeAction + '</div>';
+          data[key] = [value.title, value.content, action];
         });
         
         eventsTable.fnAddData(data);
