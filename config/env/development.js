@@ -1,7 +1,15 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/angle-dev',
+	db: {
+		host: 'ds063899.mongolab.com',
+        port: '63899',
+        db: 'alt-db',
+
+        // Basic authentication (optional)
+        username: 'altuser',
+        password: 'altpass'
+	},
 	app: {
 		title: 'Angle - Development Environment'
 	},
