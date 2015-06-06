@@ -1,39 +1,28 @@
-<h3>New Member</h3>
-<section data-ng-controller="MembersController">
-	<div class="col-md-12">
-		<form name="memberForm" class="form-horizontal" data-ng-submit="create()" novalidate>
-			<fieldset>
-				<div class="form-group" ng-class="{ 'has-error': memberForm.name.$dirty && memberForm.name.$invalid }">
-					<label class="control-label" for="name">Name</label>
-					<div class="controls">
-						<input name="name" type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name">
-					</div>
-				</div>
-				<div class="form-group" ng-class="{ 'has-error': memberForm.actionLabel.$dirty && memberForm.actionLabel.$invalid }">
-					<label class="control-label" for="actionLabel">Action Label</label>
-					<div class="controls">
-						<input name="actionLabel" type="text" data-ng-model="actionLabel" id="actionLabel" class="form-control" placeholder="Action Label">
-					</div>
-				</div>
-				<div class="form-group" ng-class="{ 'has-error': memberForm.points.$dirty && memberForm.points.$invalid }">
-					<label class="control-label" for="points">Points</label>
-					<div class="controls">
-						<input name="points" type="text" data-ng-model="points" id="points" class="form-control" placeholder="Points">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="description">Description</label>
-					<div class="controls">
-						<textarea name="description" data-ng-model="description" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
-					</div>
-				</div>
-				<div class="form-group mt">
-					<input type="submit" class="btn btn-default">
-				</div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
-		</form>
+<h3>
+	New Member
+	<button type="button" class="btn btn-labeled btn-default pull-right" ui-sref="app.listMembers">
+       	<span class="btn-label">
+       		<i class="fa fa-arrow-left"></i>
+       	</span>
+       	Back
+   </button>
+</h3>
+
+<section>
+	<div class="panel panel-default ng-scope">
+		<div class="panel-body">
+	  		<form name="memberForm" class="form-horizontal" novalidate>
+		        
+		        <div ui-view="form"></div>
+
+				<fieldset>
+		            <div class="form-group">
+		               <div class="col-sm-4 col-sm-offset-2">
+		                  <button type="submit" ng-click="create()" class="btn btn-primary">Save changes</button>
+		               </div>
+		            </div>
+	         	</fieldset>
+		  </form>
+		</div>
 	</div>
 </section>

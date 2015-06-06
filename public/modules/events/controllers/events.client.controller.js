@@ -49,7 +49,6 @@ angular.module('events').controller('EventsController', [
     };
 
     // View
-    
     $scope.printQR = function() {
       var dataUrl = document.getElementsByTagName('canvas')[0].toDataURL();
       var windowContent = ['<!DOCTYPE html>',
