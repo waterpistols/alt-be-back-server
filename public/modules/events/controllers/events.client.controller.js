@@ -88,7 +88,9 @@ angular.module('events').controller('EventsController', ['$scope', '$stateParams
           data[key] = [value.title, value.content, action];
         });
         
-        eventsTable.fnAddData(data);
+        if (data.length) {
+          eventsTable.fnAddData(data);  
+        }        
       });
 
       var inputSearchClass = 'datatable_input_col_search';
@@ -105,7 +107,5 @@ angular.module('events').controller('EventsController', ['$scope', '$stateParams
         $('[class*=ColVis]').remove();
       });
     });
-
-
   }
 ]);

@@ -91,6 +91,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
           action += editAction + removeAction + '</div>';
           data[key]    = [value.name, value.actionLabel, value.description, value.points, action];
         });
+        
         if (data.length) {
           membersTable.fnAddData(data);
         }

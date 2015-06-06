@@ -77,7 +77,7 @@ angular.module('core').run(["$rootScope", "$state", "$stateParams",  '$window', 
     // Scope Globals
     // ----------------------------------- 
     $rootScope.app = {
-      name: 'Angle',
+      name: 'Alt Be Back',
       description: 'Angular Bootstrap Admin Template',
       year: ((new Date()).getFullYear()),
       layout: {

@@ -92,7 +92,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
           data[key]    = [value.name, value.actionLabel, value.description, value.points, action];
         });
         
-        activitiesTable.fnAddData(data);
+        if (data.length) {
+          activitiesTable.fnAddData(data);          
+        }
       });
 
       var inputSearchClass = 'datatable_input_col_search';
@@ -103,6 +105,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         .keyup(function () {
             activitiesTable.fnFilter(this.value, columnInputs.index(this));
         });
+        
       $scope.$on('$destroy', function(){        
         activitiesTable.fnDestroy();        
         $('[class*=ColVis]').remove();

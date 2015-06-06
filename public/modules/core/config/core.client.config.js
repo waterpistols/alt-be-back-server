@@ -16,6 +16,9 @@ angular.module('core').run(['Menus',
     // Add members menu entry
     Menus.addMenuItem('sidebar', 'Members', 'members', null, '/members', true, null, null, 'icon-users');
 
+    // Add settings menu entry
+    // Menus.addMenuItem('sidebar', 'Settings', 'settings', null, '/settings', true, null, null, 'icon-settings');
+
   }
 ]).config(['$ocLazyLoadProvider', 'APP_REQUIRES', function ($ocLazyLoadProvider, APP_REQUIRES) {
   // Lazy Load modules configuration
