@@ -8,6 +8,7 @@ angular.module('events').config(['$stateProvider', 'RouteHelpersProvider',
 			state('app.listEvents', {
 				url: '/events',
 				templateUrl: 'modules/events/views/list-events.client.view.html',
+				controller: 'EventsController',
 				authenticate: true
 
 			}).

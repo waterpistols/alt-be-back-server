@@ -1,51 +1,48 @@
-<h3>Edit Activity</h3>
-<section data-ng-controller="ActivitiesController" data-ng-init="findOne()">
-	<div class="col-md-12">
-		<form name="activityForm" class="form-horizontal" data-ng-submit="update(activityForm.$valid)" novalidate>
-			<fieldset>
-				<div class="form-group" ng-class="{ 'has-error' : submitted && activityForm.name.$invalid}">
-					<label class="control-label" for="name">Name</label>
-					<div class="controls">
-						<input name="name" type="text" data-ng-model="activity.name" id="name" class="form-control" placeholder="Name" required>
+<h3>
+	Edit Event
+	<button type="button" class="btn btn-labeled btn-default pull-right" ui-sref="app.listActivities">
+       	<span class="btn-label">
+       		<i class="fa fa-arrow-left"></i>
+       	</span>
+       	Back
+   </button>
+
+</h3>
+
+<section data-ng-init="findOne()">
+	<div class="panel panel-default ng-scope">
+		<div class="panel-body">
+	  		<form name="activityForm" class="form-horizontal" novalidate>
+		        
+		        <div ui-view="form"></div>
+
+		        <fieldset>
+					<div class="form-group">
+					   <label class="col-sm-2 control-label">QR</label>
+					   <div class="col-sm-10">
+					      <div class="row">
+					         <div class="col-md-12">
+		            			<qrcode 
+									version="{{ qrOptions.version }}" 
+									error-correction-level="{{ qrOptions.errorCorrectionLevel }}" 
+									size="{{ qrOptions.size }}" 
+									data="{{ qrOptions.data }}">
+								</qrcode>
+					         </div>
+					         <a class="btn btn-primary" style="margin-left: 15px; margin-top: 10px;" data-ng-click="printQR();">Print</a>
+					      </div>
+					   </div>
 					</div>
-					<div ng-show="submitted && activityForm.name.$invalid" class="help-block">
-						<p ng-show="activityForm.name.$error.required" class="text-danger">Name is required</p>
-					</div>
-				</div>
-				<div class="form-group" ng-class="{ 'has-error' : submitted && activityForm.actionLabel.$invalid}">
-					<label class="control-label" for="name">Action Label</label>
-					<div class="controls">
-						<input name="actionLabel" type="text" data-ng-model="activity.actionLabel" id="actionLabel" class="form-control" placeholder="Action Label" required>
-					</div>
-					<div ng-show="submitted && activityForm.actionLabel.$invalid" class="help-block">
-						<p ng-show="activityForm.actionLabel.$error.required" class="text-danger">Action Label is required</p>
-					</div>
-				</div>
-				<div class="form-group" ng-class="{ 'has-error' : submitted && activityForm.points.$invalid}">
-					<label class="control-label" for="points">Points</label>
-					<div class="controls">
-						<input name="points" type="text" data-ng-model="activity.points" id="points" class="form-control" placeholder="Points" required>
-					</div>
-					<div ng-show="submitted && activityForm.points.$invalid" class="help-block">
-						<p ng-show="activityForm.points.$error.required" class="text-danger">Points is required</p>
-					</div>
-				</div>
-				<div class="form-group" ng-class="{ 'has-error' : submitted && activityForm.description.$invalid}">
-					<label class="control-label" for="description">Description</label>
-					<div class="controls">
-						<textarea name="description" data-ng-model="activity.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description" required></textarea>
-					</div>
-					<div ng-show="submitted && activityForm.description.$invalid" class="help-block">
-						<p ng-show="activityForm.description.$error.required" class="text-danger">Description is required</p>
-					</div>
-				</div>
-				<div class="form-group mt">
-					<input type="submit" value="Update" class="btn btn-default">
-				</div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
-		</form>
+				</fieldset>
+
+				<fieldset>
+		            <div class="form-group">
+		               <div class="col-sm-4 col-sm-offset-2">
+		                  <button type="submit" ng-click="update()" class="btn btn-primary">Save changes</button>
+		               </div>
+		            </div>
+	         	</fieldset>
+		  </form>
+		</div>
 	</div>
 </section>

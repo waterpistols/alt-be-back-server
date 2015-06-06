@@ -16,6 +16,25 @@
 		        
 		        <div ui-view="form"></div>
 
+		        <fieldset>
+					<div class="form-group">
+					   <label class="col-sm-2 control-label">QR</label>
+					   <div class="col-sm-10">
+					      <div class="row">
+					         <div class="col-md-12">
+		            			<qrcode 
+									version="{{ qrOptions.version }}" 
+									error-correction-level="{{ qrOptions.errorCorrectionLevel }}" 
+									size="{{ qrOptions.size }}" 
+									data="{{ qrOptions.data }}">
+								</qrcode>
+					         </div>
+					         <a class="btn btn-primary" style="margin-left: 15px; margin-top: 10px;" data-ng-click="printQR();">Print</a>
+					      </div>
+					   </div>
+					</div>
+				</fieldset>
+
 				<fieldset>
 		            <div class="form-group">
 		               <div class="col-sm-4 col-sm-offset-2">

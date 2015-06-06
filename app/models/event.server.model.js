@@ -20,7 +20,6 @@ var mongoose = require('mongoose'),
 	repeat (daily weekly)
 	location
 	points
-	posts
 	comments
 
  */
@@ -64,10 +63,6 @@ var EventSchema = new Schema({
     	type: Boolean,
     	default: true
     },
-    qrCode: {
-    	type: String,
-    	default: ''
-    },
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
@@ -84,10 +79,10 @@ var EventSchema = new Schema({
 		type: Number,
 		required: 'Points cannot be blank'
 	},
-	posts: {
+	comments: [{
 		type: Schema.ObjectId,
-		ref: 'Post'
-	}
+		ref: 'Comment'
+	}]
 });
 
 mongoose.model('Event', EventSchema);

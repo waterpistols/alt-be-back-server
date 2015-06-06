@@ -20,7 +20,8 @@ angular.module('events').controller('EventsController', [
     // Create
     $scope.event = new Events({
       repeat: 'no',
-      active: true
+      active: true,
+      comments: []
     });
 
     $scope.create = function() {
@@ -48,13 +49,7 @@ angular.module('events').controller('EventsController', [
     };
 
     // View
-    $scope.qrOptions = {
-      data: 1,
-      version: 2,
-      errorCorrectionLevel: 'M',
-      size: 200 // px size
-    };
-
+    
     $scope.printQR = function() {
       var dataUrl = document.getElementsByTagName('canvas')[0].toDataURL();
       var windowContent = ['<!DOCTYPE html>',
@@ -85,6 +80,14 @@ angular.module('events').controller('EventsController', [
         $scope.event = response;
         $scope.startDate = moment(response.startDate).format('DD/MM/YYYY HH:MM');
         $scope.endDate = moment(response.endDate).format('DD/MM/YYYY HH:MM');
+
+        $scope.qrOptions = {
+          data: $scope.event._id,
+          version: 2,
+          errorCorrectionLevel: 'M',
+          size: 200 // px size
+        };
+
       });
     };
 
@@ -128,7 +131,7 @@ angular.module('events').controller('EventsController', [
             value.points,
             value.attending.length,
             value.location,
-            value.active, 
+            value.active ? 'Yes' : 'No',
             action
           ];
         });
