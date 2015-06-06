@@ -24,14 +24,20 @@ function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
       templateUrl: 'modules/core/views/core.client.view.html',
       resolve: helper.resolveFor('modernizr', 'icons', 'datatables', 'datatables-pugins')
     })
+    
     .state('app.home', {
       url: '/home',
       templateUrl: 'modules/core/views/home.client.view.html'
     })
-    .state('app.events', {
-      url: '/events',
-      templateUrl: 'modules/events/views/list-events.client.view.html'
+
+    .state('blank', {
+      abstract: true,
+      templateUrl: 'modules/core/views/blank.client.view.html',
+      controller: ["$rootScope", function($rootScope) {
+        $rootScope.app.layout.isBoxed = false;
+      }]      
     })
+    
     // 
     // CUSTOM RESOLVES
     //   Add your own resolves properties

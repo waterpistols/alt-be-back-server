@@ -1,7 +1,7 @@
 'use strict';
 
 // Configuring the Articles module
-angular.module('articles').run(['Menus',
+angular.module('events').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
 		Menus.addMenuItem('sidebar', 'Events', 'events', 'dropdown', '/events(/.*)?', false, null, 20);
