@@ -61,7 +61,7 @@ angular.module('core')
       $rootScope.$on('$stateChangeStart', function (event, toState) {
         console.log()
         if (toState.authenticate && Authentication.user === '') {
-          $location.path('/signin');
+          $location.path('/login');
         }
       });
     });
