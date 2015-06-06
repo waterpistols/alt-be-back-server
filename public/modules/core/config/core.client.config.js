@@ -13,6 +13,9 @@ angular.module('core').run(['Menus',
     // Add playground menu entry
     Menus.addMenuItem('sidebar', 'Playground', 'activities', null, '/activities', true, null, null, 'icon-cup');
 
+    // Add members menu entry
+    Menus.addMenuItem('sidebar', 'Members', 'members', null, '/members', true, null, null, 'icon-users');
+
   }
 ]).config(['$ocLazyLoadProvider', 'APP_REQUIRES', function ($ocLazyLoadProvider, APP_REQUIRES) {
   // Lazy Load modules configuration
