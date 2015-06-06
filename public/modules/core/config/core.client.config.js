@@ -22,6 +22,7 @@ angular.module('core').run(['Menus',
     modules: APP_REQUIRES.modules
   });
 
+
 }]).config(['$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
   function ( $controllerProvider, $compileProvider, $filterProvider, $provide) {
   // registering components after bootstrap

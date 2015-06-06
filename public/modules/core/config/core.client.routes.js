@@ -12,7 +12,7 @@ function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
   $locationProvider.html5Mode(false);
 
   // default route
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/events');
 
   // 
   // Application Routes
@@ -22,7 +22,7 @@ function ($stateProvider, $locationProvider, $urlRouterProvider, helper) {
       // url: '/',
       abstract: true,
       templateUrl: 'modules/core/views/core.client.view.html',
-      resolve: helper.resolveFor('modernizr', 'icons')
+      resolve: helper.resolveFor('modernizr', 'icons', 'datatables', 'datatables-pugins')
     })
     .state('app.home', {
       url: '/home',

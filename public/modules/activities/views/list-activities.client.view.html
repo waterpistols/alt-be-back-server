@@ -1,18 +1,44 @@
 <h3>Activities</h3>
-<section data-ng-controller="ActivitiesController" data-ng-init="find()">
-	<div class="list-group">
-		<a data-ng-repeat="activity in activities" data-ng-href="#!/activities/{{activity._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="activity.created | date:'mediumDate'"></span>
-				by
-				<span data-ng-bind="activity.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="activity.name"></h4>
-			<p class="list-group-item-text" data-ng-bind="activity.description"></p>
-		</a>
-	</div>	
-	<h4 class="alert alert-purple text-center pv-lg" data-ng-if="activities.$resolved && !activities.length">
-		No activities yet, why don't you <a href="/#!/activities/create" class="text-yellow">create one</a>?
-	</h4>
-</section>
+<div ng-controller="ActivitiesController" class="container-fluid">
+	<div class="row">
+      <div class="col-lg-12">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               Activities               
+            </div>
+            <div class="panel-body">            
+               <table id="activitiesTable" class="table table-striped table-hover">
+                  <thead>
+                     <tr>
+                        <th class="sort-alpha">Name</th>
+                        <th class="sort-alpha">Action Label</th>
+                        <th class="sort-numeric">Points</th>
+                        <th class="sort-alpha">Description</th>
+                        <th>Actions</th>
+                     </tr>
+                  </thead>
+                  <tbody>                  		
+                  </tbody>
+                  <tfoot>
+                     <tr>
+                        <th>
+                           <input type="text" name="filter_name" placeholder="Filter Name" class="form-control input-sm datatable_input_col_search" />
+                        </th>
+                        <th>
+                           <input type="text" name="filter_action_label" placeholder="Filter Action Label" class="form-control input-sm datatable_input_col_search" />
+                        </th>                        
+                        <th>
+                           <input type="text" name="filter_description" placeholder="Filter Description" class="form-control input-sm datatable_input_col_search" />
+                        </th> 
+                        <th>
+                           <input type="text" name="filter_points" placeholder="Filter Points" class="form-control input-sm datatable_input_col_search" />
+                        </th>  
+                        <th></th>                      
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+<div>

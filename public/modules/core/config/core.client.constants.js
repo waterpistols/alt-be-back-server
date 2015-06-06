@@ -32,7 +32,13 @@ angular.module('core')
     scripts: {
       'modernizr':          ['/lib/modernizr/modernizr.js'],
       'icons':              ['/lib/fontawesome/css/font-awesome.min.css',
-                             '/lib/simple-line-icons/css/simple-line-icons.css']
+                             '/lib/simple-line-icons/css/simple-line-icons.css'],
+      'datatables':         ['/lib/datatables/media/js/jquery.dataTables.min.js',
+                             '/vendor/datatable-bootstrap/css/dataTables.bootstrap.css'],
+      'datatables-pugins':  ['/vendor/datatable-bootstrap/js/dataTables.bootstrap.js',
+                             '/vendor/datatable-bootstrap/js/dataTables.bootstrapPagination.js',
+                             '/lib/datatables-colvis/js/dataTables.colVis.js',
+                             '/lib/datatables-colvis/css/dataTables.colVis.css']
     },
     // Angular based script (use the right module name)
     modules: [

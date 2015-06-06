@@ -49,7 +49,7 @@ angular.module('core').provider('RouteHelpers', ['APP_REQUIRES', function (appRe
           if (appRequires.modules)
               for(var m in appRequires.modules)
                   if(appRequires.modules[m].name && appRequires.modules[m].name === name)
-                      return appRequires.modules[m];
+                      return appRequires.modules[m];          
           return appRequires.scripts && appRequires.scripts[name];
         }
 

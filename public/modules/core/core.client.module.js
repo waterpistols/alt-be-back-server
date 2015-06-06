@@ -48,7 +48,7 @@ angular.module('core').run(["$rootScope", "$state", "$stateParams",  '$window', 
       viewAnimation: 'ng-fadeInUp'
     };
     $rootScope.user = {
-      name:     'John',
+      name:     'WaterPistols',
       job:      'ng-Dev',
       picture:  'app/img/user/02.jpg'
     };
