@@ -14,32 +14,16 @@ var SettingSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	name: {
+	label: {
 		type: String,
 		default: '',
-		trim: true,
-		required: 'Name cannot be blank'
+		trim: true,		
 	},
-	actionLabel: {
-		type: String,
-		default: '',
-		trim: true		
-	},
-	image: {
+	value: {
 		type: String,
 		default: '',
 		trim: true		
-	},
-	points: {
-		type: Number,
-		default: '',
-		trim: true		
-	},
-	description: {
-		type: String,
-		default: '',
-		trim: true
-	},
+	},	
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'

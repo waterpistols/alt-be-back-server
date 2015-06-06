@@ -1,0 +1,27 @@
+<h3>New Setting</h3>
+<section data-ng-controller="SettingController">
+	<div class="col-md-12">
+		<form name="settingForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error': settingForm.label.$dirty && settingForm.label.$invalid }">
+					<label class="control-label" for="name">Label</label>
+					<div class="controls">
+						<input name="name" type="text" data-ng-model="label" id="name" class="form-control" placeholder="Label">
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': settingForm.value.$dirty && settingForm.value.$invalid }">
+					<label class="control-label" for="value">Value</label>
+					<div class="controls">
+						<input name="value" type="text" data-ng-model="value" id="value" class="form-control" placeholder="Value">
+					</div>
+				</div>				
+				<div class="form-group mt">
+					<input type="submit" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

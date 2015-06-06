@@ -1,0 +1,33 @@
+<h3>Edit Setting</h3>
+<section data-ng-controller="SettingController" data-ng-init="findOne()">
+	<div class="col-md-12">
+		<form name="settingForm" class="form-horizontal" data-ng-submit="update(settingForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && settingForm.label.$invalid}">
+					<label class="control-label" for="label">Label</label>
+					<div class="controls">
+						<input name="label" type="text" data-ng-model="setting.label" id="label" class="form-control" placeholder="Label" required>
+					</div>
+					<div ng-show="submitted && settingForm.label.$invalid" class="help-block">
+						<p ng-show="settingForm.label.$error.required" class="text-danger">Label is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && settingForm.value.$invalid}">
+					<label class="control-label" for="value">Value</label>
+					<div class="controls">
+						<input name="value" type="text" data-ng-model="setting.value" id="value" class="form-control" placeholder="Value" required>
+					</div>
+					<div ng-show="submitted && settingForm.value.$invalid" class="help-block">
+						<p ng-show="settingForm.value.$error.required" class="text-danger">Value is required</p>
+					</div>
+				</div>				
+				<div class="form-group mt">
+					<input type="submit" value="Update" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
