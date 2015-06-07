@@ -31,6 +31,12 @@ angular.module('activities').controller('ActivitiesController', [
       });
     };
 
+    $scope.isCreate = false;
+
+    if ($state.current.url === '/activities/create') {
+      $scope.isCreate = true;
+    }  
+
     // Remove
     $scope.remove = function() {
       $scope.activity.$remove(function() {

@@ -66,6 +66,9 @@ exports.popularActivity = function(req, res) {
 		} else {
 			var activities = {};
 			var total = 0;
+
+			var result = {};
+			result['activities'] = []
 			entries.forEach(function(item) {
 				activities[item.action.label] = 0;
 			});
@@ -75,7 +78,10 @@ exports.popularActivity = function(req, res) {
 				total++;
 			});
 
-			activities.total = total;
+			// activities.forEach(function(item) {
+			// 	result['activities'].push(item);
+			// });
+			// result['activities'] = total;
 
 			res.json(activities);
 		}

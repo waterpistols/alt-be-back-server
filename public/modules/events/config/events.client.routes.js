@@ -48,7 +48,7 @@ angular.module('events').config(['$stateProvider', 'RouteHelpersProvider',
 					'form@app.editEvent': {
 						templateUrl: 'modules/events/views/form-event.client.view.html',		
 					}
-				},
+				},				
 				authenticate: true
 			});
 	}

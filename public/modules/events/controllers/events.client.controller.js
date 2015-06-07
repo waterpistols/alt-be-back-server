@@ -28,6 +28,12 @@ angular.module('events').controller('EventsController', [
       attending: [],
       checkins: []
     });
+    
+    $scope.isCreate = false;
+
+    if ($state.current.url === '/events/create') {
+      $scope.isCreate = true;
+    }    
 
     $scope.create = function() {
       $scope.event.$save(function(response) {
@@ -136,7 +142,6 @@ angular.module('events').controller('EventsController', [
 
           data[key] = [
             moment(value.created).format('DD/MM/YYYY HH:mm'),
-            '-',
             '<a href="#!/events/' + value._id + '">' + value.title + '</a>',
             value.points,
             value.attending.length,
