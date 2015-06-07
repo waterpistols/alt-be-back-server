@@ -13,9 +13,7 @@ var mongoose = require('mongoose'),
 exports.all = function(req, res) {
 	Action.find({}).populate('user').sort("-date").exec(function(err, entries) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 		} else {
 			res.json(entries);
 		}

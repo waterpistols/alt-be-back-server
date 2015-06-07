@@ -22,95 +22,98 @@ exports.checkin = function(req, res) {
 	var model = payload[0];
 	var entryId = payload[1];
 
-	if(model === 'event') {
-		Event.findById(entryId).exec(function(err, event) {
-			if (err) {
-				return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
-			}
-
-			event.checkins.push(req.body.memberId);
-			event.save();
-
-			var action = new Action({
-				category: 'event',
-				action: {
-					id: event._id,
-					title: event.title,
-					label: 'just checked in at'
-				},
-				user: req.body.memberId
-			});
-
-			action.save(function(err) {
-				if (err) {
-					return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
-				}
-
-				Member.findById(req.body.memberId).exec(function(err, member) {
-					if (err) {
-						return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
-					}
-
-					// Add points to user
-					member.points += event.points;
-					member.save(function(err) {
-						if (err) {
-							return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
-						}
-
-						res.json({
-							'points': event.points,
-							'image': event.image
-						})
-
-					});
-				});
-
-			});
-		});
+	if(payload.length !== 2) {
+		res.json({ 'error': 'well cock' });
 	} else {
-		Activity.findById(entryId).exec(function(err, activity) {
-			if (err) {
-				return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
-			}
-
-			var action = new Action({
-				category: 'activity',
-				action: {
-					id: activity._id,
-					label: activity.actionLabel,
-					image: activity.image
-				},
-				user: req.body.memberId
-			});
-
-			action.save(function(err) {
+		if(model === 'e') {
+			Event.findById(entryId).exec(function(err, event) {
 				if (err) {
 					return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 				}
 
-				Member.findById(req.body.memberId).exec(function(err, member) {
+				event.checkins.push(req.body.memberId);
+				event.save();
+
+				var action = new Action({
+					category: 'event',
+					action: {
+						id: event._id,
+						title: event.title,
+						label: 'just checked in at'
+					},
+					user: req.body.memberId
+				});
+
+				action.save(function(err) {
 					if (err) {
 						return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 					}
 
-					// Add points to user
-					member.points += activity.points;
-					member.save(function(err) {
+					Member.findById(req.body.memberId).exec(function(err, member) {
 						if (err) {
 							return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 						}
 
-						res.json({
-							'points': activity.points,
-							'image': activity.image
-						})
+						// Add points to user
+						member.points += event.points;
+						member.save(function(err) {
+							if (err) {
+								return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+							}
 
+							res.json({
+								'points': event.points,
+								'image': event.image
+							})
+
+						});
 					});
+
+				});
+			});
+		} else {
+			Activity.findById(entryId).exec(function(err, activity) {
+				if (err) {
+					return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+				}
+				var action = new Action({
+					category: 'activity',
+					action: {
+						id: activity._id,
+						label: activity.actionLabel,
+						image: activity.image
+					},
+					user: req.body.memberId
 				});
 
+				action.save(function(err) {
+					if (err) {
+						return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+					}
+
+					Member.findById(req.body.memberId).exec(function(err, member) {
+						if (err) {
+							return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+						}
+
+						// Add points to user
+						member.points += activity.points;
+						member.save(function(err) {
+							if (err) {
+								return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+							}
+
+							res.json({
+								'points': activity.points,
+								'image': activity.image
+							})
+
+						});
+					});
+
+				});
 			});
-		});
+		}
 	}
 };
 
