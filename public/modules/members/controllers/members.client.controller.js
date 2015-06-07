@@ -33,7 +33,7 @@ angular.module('members').controller('MembersController', [
     // Update
     $scope.update = function() {
       $scope.member.$update(function() {
-        $state.go('app.viewMember', { eventId: $scope.member._id})
+        $state.go('app.viewMember', { memberId: $scope.member._id})
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });
