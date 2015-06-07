@@ -107,3 +107,23 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+exports.upload = function(req, res, next) {
+	var file = req.files.file;
+
+	var activity = req.activity;
+
+	activity = _.extend(activity, req.body);
+
+	activity.image = file.path.replace('public/', '');
+
+	activity.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(activity);
+		}
+	});	
+};

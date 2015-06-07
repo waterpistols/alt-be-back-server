@@ -33,7 +33,7 @@ angular.module('members').controller('MembersController', [
     // Update
     $scope.update = function() {
       $scope.member.$update(function() {
-        $state.go('app.viewMember', { eventId: $scope.member._id})
+        $state.go('app.viewMember', { memberId: $scope.member._id})
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -85,8 +85,11 @@ angular.module('members').controller('MembersController', [
           editAction   = '<a style="display:inline; margin-right: 2px;" class="btn btn-primary" href="' + editRoute + '"><i class="fa fa-edit"></i></a>';
           action += editAction + '</div>';
           data[key] = [
-            '<a href="#!/members/' + value._id + '">' + value.firstName + ' ' + value.lastName + '</a>',
+            '<a href="#!/members/' + value._id + '">' + value.name + '</a>',
             value.email,
+            value.profession,
+            value.cardNumber,
+            value.phone,
             action
           ];
         });

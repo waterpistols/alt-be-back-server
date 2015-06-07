@@ -19,6 +19,8 @@ module.exports = function(app) {
 		.put(activities.update)
 		.delete(users.requiresLogin, activities.hasAuthorization, activities.delete);
 
+	app.route('/activities/:activityId/upload')
+		.post(activities.upload);
 	// Finish by binding the event middleware
 	app.param('activityId', activities.activityByID);
 };

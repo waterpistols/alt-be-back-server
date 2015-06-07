@@ -3,17 +3,22 @@
 angular.module('activities').controller('ActivitiesController', [
   '$scope', 
   '$stateParams', 
+  '$state',
   '$location', 
   '$timeout', 
   'Authentication', 
   'Activities',
   'FileUploader',
-  function($scope, $stateParams, $location, $timeout, Authentication, Activities, FileUploader) {
+
+  function($scope, $stateParams, $state, $location, $timeout, Authentication, Activities, FileUploader) {
     $scope.authentication = Authentication;
 
-    // $scope.uploader = new FileUploader({
-    //     url: 'server/upload.php'
-    // });
+    $scope.uploader = new FileUploader({
+        url: 'activities/' + $stateParams.activityId + '/upload',
+        onSuccessItem: function () {
+          $state.go('app.editActivity', { activityId: $scope.activity._id})
+        }
+    });
 
     // Create
     $scope.activity = new Activities();

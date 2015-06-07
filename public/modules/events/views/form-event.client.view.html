@@ -17,17 +17,32 @@
 </fieldset>
 
 <fieldset>
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Cover Image</label>
+	<div class="form-group">		
+		
+		<label class="col-sm-2 control-label">
+			<img height="60" width="60" src="{{ event.image }}" />
+			<span>Cover Image</span>
+		</label>
 		<div class="col-sm-10">
+			<input style="display:none;" id="filestyle-1" filestyle="" type="file" data-button-text="Single" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="uploader" class="form-control" />
 			<div class="bootstrap-filestyle input-group">
-				<input type="text" class="form-control" disabled=""> 
+				<input type="text" class="form-control " disabled="">	
 				<span class="group-span-filestyle input-group-btn" tabindex="0">
 					<label for="filestyle-1" class="btn btn-default ">
 						<span class="glyphicon glyphicon-folder-open"></span> 
 						Single
-					</label>
+					</label>					
 				</span>
+			</div>
+			<div class="input-group">
+				<div ng-repeat="item in uploader.queue">				
+					<div class="bootstrap-filestyle input-group">
+						{{ item.file.name }}
+					</div>					
+			        <button type="button" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess" class="btn btn-info">
+			        <span class="icon-cloud-upload mr"></span>Upload
+			        <span ng-show="item.isSuccess"><i class="fa fa-check"></i></span></button>
+			    </div>
 			</div>
 		</div>
 	</div>	

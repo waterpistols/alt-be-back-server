@@ -103,6 +103,9 @@ exports.create = function(req, res) {
  * Show the current event
  */
 exports.read = function(req, res) {
+	var event = req.event;
+	event.currentUser = req.user;
+	
 	res.json(req.event);
 };
 
@@ -179,4 +182,24 @@ exports.hasAuthorization = function(req, res, next) {
 		});
 	}
 	next();
+};
+
+exports.upload = function(req, res, next) {
+	var file = req.files.file;
+
+	var event = req.event;
+
+	event = _.extend(event, req.body);
+
+	event.image = file.path.replace('public/', '');
+
+	event.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(event);
+		}
+	});
 };

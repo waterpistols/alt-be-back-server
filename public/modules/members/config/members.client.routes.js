@@ -38,6 +38,7 @@ angular.module('members').config(['$stateProvider',
 			authenticate: true
 		}).
 		state('app.editMember', {
+			url: '/members/:memberId/edit',
 			views: {
 				'': {
 					templateUrl: 'modules/members/views/edit-member.client.view.html',

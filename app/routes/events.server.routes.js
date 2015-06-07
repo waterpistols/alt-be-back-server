@@ -25,6 +25,8 @@ module.exports = function(app) {
 
 	app.route('/events/go')
 		.post(events.go);
+	app.route('/events/:eventId/upload')
+		.post(events.upload);
 
 	// Finish by binding the event middleware
 	app.param('eventId', events.eventByID);

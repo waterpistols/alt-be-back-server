@@ -7,6 +7,7 @@ var fs = require('fs'),
 	http = require('http'),
 	https = require('https'),
 	express = require('express'),
+	multer = require('multer'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
@@ -66,6 +67,13 @@ module.exports = function(db) {
 		},
 		level: 9
 	}));
+
+	app.use(multer({
+	  	dest: './public/modules/core/uploads',
+	  	rename: function (fieldname, filename) {
+	    	return filename.replace(/\W+/g, '-').toLowerCase() + Date.now()
+	  	}
+	}))
 
 	// Showing stack errors
 	app.set('showStackError', true);
