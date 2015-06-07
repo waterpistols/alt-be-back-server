@@ -45,11 +45,11 @@ var EventSchema = new Schema({
 	},
 	startDate: {
 		type: Date,
-		required: 'Start Date cannot be blank'
+		// required: 'Start Date cannot be blank'
 	},
 	endDate: {
 		type: Date,
-		required: 'Start Date cannot be blank'
+		// required: 'Start Date cannot be blank'
 	},
 	attending: [{
         type: Schema.ObjectId,

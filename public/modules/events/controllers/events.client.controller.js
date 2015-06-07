@@ -123,13 +123,17 @@ angular.module('events').controller('EventsController', [
         var editAction = '';
         var removeAction = '';
         var action = '';
+        var image = '';
 
         angular.forEach(items, function(value, key) {
           action = '<div class="pull-left">';
           editRoute    = '#!/events/' + value._id + '/edit';
           editAction   = '<a style="display:inline; margin-right: 2px;" class="btn btn-primary" href="' + editRoute + '"><i class="fa fa-edit"></i></a>';
           action += editAction + '</div>';
-          
+          if (value.image) {            
+            image += '<img height="60" width="60" src="' + value.image + '"/>';
+          }
+
           data[key] = [
             moment(value.created).format('DD/MM/YYYY HH:mm'),
             '-',
@@ -138,6 +142,7 @@ angular.module('events').controller('EventsController', [
             value.attending.length,
             value.location,
             value.active ? 'Yes' : 'No',
+            image,
             action
           ];
         });
