@@ -17,8 +17,12 @@
 </fieldset>
 
 <fieldset>
-	<div class="form-group">
-		<label class="col-sm-2 control-label">Cover Image</label>		
+	<div class="form-group">		
+		
+		<label class="col-sm-2 control-label">
+			<img height="60" width="60" src="{{ event.image }}" />
+			<span>Cover Image</span>
+		</label>
 		<div class="col-sm-10">
 			<input style="display:none;" id="filestyle-1" filestyle="" type="file" data-button-text="Single" data-class-button="btn btn-default" data-classinput="form-control inline" nv-file-select="" uploader="uploader" class="form-control" />
 			<div class="bootstrap-filestyle input-group">

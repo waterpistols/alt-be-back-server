@@ -14,7 +14,10 @@ angular.module('events').controller('EventsController', [
     $scope.authentication = Authentication;
 
     $scope.uploader = new FileUploader({
-        url: 'events/' + $stateParams.eventId + '/upload'
+        url: 'events/' + $stateParams.eventId + '/upload',
+        onSuccessItem: function () {
+          $state.go('app.editEvent', { eventId: $scope.event._id})
+        }
     });
 
     // Create

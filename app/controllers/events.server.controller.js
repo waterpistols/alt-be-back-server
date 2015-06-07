@@ -202,6 +202,4 @@ exports.upload = function(req, res, next) {
 			res.json(event);
 		}
 	});
-
-	res.json({'msg' : 'booya'});
 };
