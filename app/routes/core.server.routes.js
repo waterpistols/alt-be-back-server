@@ -23,4 +23,7 @@ module.exports = function(app) {
 	app.route('/checkin')
 		.post(core.checkin);
 
+	app.route('/rank')
+		.get(core.rank);
+
 };

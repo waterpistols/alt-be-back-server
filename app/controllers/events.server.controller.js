@@ -14,34 +14,23 @@ var mongoose = require('mongoose'),
 // Frontend
 /////////////////////////////////////////////////////////////
 
-// function getMember(memberId, callback) {
-// 	Member.findOne({ _id: memberId }, function(err, member) {
-// 		if (err) {
-// 			return res.status(400).send({
-// 				message: errorHandler.getErrorMessage(err)
-// 			});
-// 		} else {
-// 			callback(member); 
-// 		}
-// 	})
-// }
-
 /**
  * Post comment
  */
 exports.postComment = function(req, res) {
 
-	var comment = new Comment({
-		message: req.body.message,
-		user: req.body.memberId
-	});
-
-	comment.save(function(err) {
+	Member.findById(req.body.memberId).exec(function(err, member) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 		}
+
+		var comment = {
+			message: req.body.message,
+			user: req.body.memberId,
+			userName: member.name,
+			avatar: member.avatar,
+			date: new Date()
+		};
 
 		Event.findById(req.body.eventId).exec(function(err, event) {
 			if (err) {
@@ -58,7 +47,6 @@ exports.postComment = function(req, res) {
 
 exports.go = function(req, res) {
 
-	// getMember(req.body.memberId, function(member) {
 	Event.findById(req.body.eventId).exec(function(err, event) {
 		if (err) {
 			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
@@ -87,7 +75,6 @@ exports.go = function(req, res) {
 			}
 		});
 	});
-	// });
 };
 
 
@@ -159,7 +146,7 @@ exports.delete = function(req, res) {
  * List of events
  */
 exports.list = function(req, res) {
-	Event.find().sort('-created').populate('user').populate('comments').exec(function(err, events) {
+	Event.find().sort('-created').exec(function(err, events) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -174,7 +161,7 @@ exports.list = function(req, res) {
  * Event middleware
  */
 exports.eventByID = function(req, res, next, id) {
-	Event.findById(id).populate('user').populate('comments').exec(function(err, event) {
+	Event.findById(id).exec(function(err, event) {
 		if (err) return next(err);
 		if (!event) return next(new Error('Failed to load event ' + id));
 		req.event = event;

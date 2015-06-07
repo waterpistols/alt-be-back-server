@@ -114,38 +114,57 @@ exports.checkin = function(req, res) {
 	}
 };
 
-exports.postAdd = function(req, res) {
-	var post = new Post({
-		message: req.body.message,
-		user: req.body.memberId
-	});
-
-	post.save(function(err) {
+exports.rank = function(req, res) {
+	Member.find({}).sort("-points").exec(function(err, top) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 		} else {
-			var action = new Action({
-				category: 'post',
-				action: {
-					id: post._id,
-					input: post.message,
-					label: 'posted'
-				},
-				user: req.body.memberId
-			});
 
-			action.save(function(err) {
-				if (err) {
-					return res.status(400).send({
-						message: errorHandler.getErrorMessage(err)
-					});
-				} else {
-					res.json(post);
-				}
-			});
+			// Get settings
+
+			res.json(entries);
 		}
+	});
+};
+
+exports.postAdd = function(req, res) {
+	Member.findById(req.body.memberId).exec(function(err, member) {
+		if (err) {
+			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+		}
+
+		var post = new Post({
+			message: req.body.message,
+			user: member
+		});
+
+		post.save(function(err) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				var action = new Action({
+					category: 'post',
+					action: {
+						id: post._id,
+						input: post.message,
+						label: 'posted'
+					},
+					user: req.body.memberId
+				});
+
+				action.save(function(err) {
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						res.json(post);
+					}
+				});
+			}
+		});
 	});
 };
 
@@ -154,17 +173,18 @@ exports.postDetail = function(req, res) {
 };
 
 exports.postComment = function(req, res) {
-	var comment = new Comment({
-		message: req.body.message,
-		user: req.body.memberId
-	});
-
-	comment.save(function(err) {
+	Member.findById(req.body.memberId).exec(function(err, member) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 		}
+
+		var comment = {
+			message: req.body.message,
+			user: req.body.memberId,
+			userName: member.name,
+			avatar: member.avatar,
+			date: new Date()
+		};
 
 		Post.findById(req.body.postId).exec(function(err, post) {
 			if (err) {
@@ -177,10 +197,11 @@ exports.postComment = function(req, res) {
 			res.json(post);
 		});
 	});
+	
 };
 
 exports.postById = function(req, res, next, id) {
-	Post.findById(id).populate('user').populate('comments').exec(function(err, post) {
+	Post.findById(id).populate('user').exec(function(err, post) {
 		if (err) return next(err);
 		if (!post) return next(new Error('Failed to load event ' + id));
 		req.post = post;

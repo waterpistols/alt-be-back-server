@@ -80,8 +80,7 @@ var EventSchema = new Schema({
 		required: 'Points cannot be blank'
 	},
 	comments: [{
-		type: Schema.ObjectId,
-		ref: 'Comment'
+		type: Schema.Types.Mixed
 	}]
 });
 

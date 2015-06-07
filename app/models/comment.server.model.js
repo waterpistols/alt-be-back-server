@@ -22,6 +22,12 @@ var CommentSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'Member'
+	},
+	userName: {
+		type: String
+	},
+	avatar: {
+		type: String
 	}
 });
 
