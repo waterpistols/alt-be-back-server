@@ -102,7 +102,7 @@ exports.eventsChart = function(req, res) {
 				events[item.action.id][item.action.label]++;				
 			});
 			
-			res.json(activities);
+			res.json(events);
 		}
 	});
 };
