@@ -6,18 +6,18 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
-
-/**
- * Comment Schema
- */
-var CommentSchema = new Schema({
+var ActionSchema = new Schema({
 	date: {
 		type: Date,
 		default: Date.now
 	},
-	message: {
+	category: {
 		type: String,
-		required: 'Message cannot be blank'
+		default: '',
+		required: 'Category cannot be blank'
+	},
+	action: {
+		type: Schema.Types.Mixed
 	},
 	user: {
 		type: Schema.ObjectId,
@@ -25,4 +25,4 @@ var CommentSchema = new Schema({
 	}
 });
 
-mongoose.model('Comment', CommentSchema);
+mongoose.model('Action', ActionSchema);

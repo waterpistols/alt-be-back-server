@@ -6,8 +6,127 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Event = mongoose.model('Event'),
+	Comment = mongoose.model('Comment'),
+	Action = mongoose.model('Action'),
+	Member = mongoose.model('Member'),
 	_ = require('lodash');
 
+// Frontend
+/////////////////////////////////////////////////////////////
+
+// function getMember(memberId, callback) {
+// 	Member.findOne({ _id: memberId }, function(err, member) {
+// 		if (err) {
+// 			return res.status(400).send({
+// 				message: errorHandler.getErrorMessage(err)
+// 			});
+// 		} else {
+// 			callback(member); 
+// 		}
+// 	})
+// }
+
+/**
+ * Post comment
+ */
+exports.postComment = function(req, res) {
+
+	var comment = new Comment({
+		message: req.body.message,
+		user: req.body.memberId
+	});
+
+	comment.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}
+
+		Event.findById(req.body.eventId).exec(function(err, event) {
+			if (err) {
+				return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+			}
+
+			event.comments.push(comment);
+			event.save();
+
+			res.json(event);
+		});
+	});
+}
+
+exports.checkin = function(req, res) {
+
+	// getMember(req.body.memberId, function(member) {
+	Event.findById(req.body.eventId).exec(function(err, event) {
+		if (err) {
+			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+		}
+
+		event.checkins.push(req.body.memberId);
+		event.save();
+
+		var action = new Action({
+			category: 'event',
+			action: {
+				id: event._id,
+				title: event.title,
+				label: 'just checked in at'
+			},
+			user: req.body.memberId
+		});
+
+		action.save(function(err) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.json(event);
+			}
+		});
+	});
+	// });
+};
+
+exports.go = function(req, res) {
+
+	// getMember(req.body.memberId, function(member) {
+	Event.findById(req.body.eventId).exec(function(err, event) {
+		if (err) {
+			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+		}
+
+		event.attending.push(req.body.memberId);
+		event.save();
+
+		var action = new Action({
+			category: 'event',
+			action: {
+				id: event._id,
+				title: event.title,
+				label: 'is attending'
+			},
+			user: req.body.memberId
+		});
+
+		action.save(function(err) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.json(event);
+			}
+		});
+	});
+	// });
+};
+
+
+// Backend
+/////////////////////////////////////////////////////////////
 /**
  * Create a event
  */
@@ -25,6 +144,7 @@ exports.create = function(req, res) {
 		}
 	});
 };
+
 
 /**
  * Show the current event
@@ -73,7 +193,7 @@ exports.delete = function(req, res) {
  * List of events
  */
 exports.list = function(req, res) {
-	Event.find().sort('-created').populate('user', 'displayName').exec(function(err, events) {
+	Event.find().sort('-created').populate('user').populate('comments').exec(function(err, events) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -88,7 +208,7 @@ exports.list = function(req, res) {
  * Event middleware
  */
 exports.eventByID = function(req, res, next, id) {
-	Event.findById(id).populate('user', 'displayName').exec(function(err, event) {
+	Event.findById(id).populate('user').populate('comments').exec(function(err, event) {
 		if (err) return next(err);
 		if (!event) return next(new Error('Failed to load event ' + id));
 		req.event = event;

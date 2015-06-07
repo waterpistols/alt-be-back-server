@@ -53,11 +53,11 @@ var EventSchema = new Schema({
 	},
 	attending: [{
         type: Schema.ObjectId,
-        ref: 'User'
+        ref: 'Member'
     }],
     checkins: [{
         type: Schema.ObjectId,
-        ref: 'User'
+        ref: 'Member'
     }],
     active: {
     	type: Boolean,

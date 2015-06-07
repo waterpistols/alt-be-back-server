@@ -20,6 +20,15 @@ module.exports = function(app) {
 		// .delete(users.requiresLogin, events.hasAuthorization, events.delete);
 		.delete(events.delete);
 
+	app.route('/events/comment')
+		.post(events.postComment);
+
+	app.route('/events/checkin')
+		.post(events.checkin);
+
+	app.route('/events/go')
+		.post(events.go);
+
 	// Finish by binding the event middleware
 	app.param('eventId', events.eventByID);
 };

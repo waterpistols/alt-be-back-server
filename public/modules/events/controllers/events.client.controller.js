@@ -21,7 +21,9 @@ angular.module('events').controller('EventsController', [
     $scope.event = new Events({
       repeat: 'no',
       active: true,
-      comments: []
+      comments: [],
+      attending: [],
+      checkins: []
     });
 
     $scope.create = function() {
