@@ -81,3 +81,28 @@ exports.popularActivity = function(req, res) {
 		}
 	});
 };
+
+exports.eventsChart = function(req, res) {
+	Action.find({category: 'event'}).populate('user').sort("-date").exec(function(err, entries) {
+		if (err) {
+			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+		} else {
+			var events = {};
+			var total = 0;
+
+			entries.forEach(function(item) {
+				events[item.action.id] = {
+					'title' : item.action.title,
+					'just checked in at' : 0,
+					'is attending' : 0,
+				};
+			});
+
+			entries.forEach(function(item) {				
+				events[item.action.id][item.action.label]++;				
+			});
+			
+			res.json(activities);
+		}
+	});
+};

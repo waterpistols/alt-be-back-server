@@ -12,4 +12,7 @@ module.exports = function(app) {
 
 	app.route('/popular-activity')
 		.get(feed.popularActivity);
+
+	app.route('/events-chart')
+		.get(feed.eventsChart);
 };
