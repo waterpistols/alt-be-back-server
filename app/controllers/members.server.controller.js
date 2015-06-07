@@ -155,6 +155,10 @@ exports.import = function(req, res) {
 	        	'cardNumber' : obj.FIELD3,
 	        };
 
+	        if ( memberObj.hasOwnProperty('FIELD4') ) {
+			    memberObj.email = obj.FIELD4;
+			}
+			
 	        var member = new Member(memberObj);
 
 	        

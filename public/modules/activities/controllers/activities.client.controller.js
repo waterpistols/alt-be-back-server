@@ -124,7 +124,7 @@ angular.module('activities').controller('ActivitiesController', [
           action += editAction + '</div>';
           
           if (value.image) {            
-            image += '<img height="60" width="60" src="' + value.image + '"/>';
+            image = '<img height="60" width="60" src="' + value.image + '"/>';
           }
 
           data[key] = [

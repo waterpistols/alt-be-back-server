@@ -32,12 +32,14 @@
   {
     "FIELD1":"Andrei Demian",
     "FIELD2":"Developer",
-    "FIELD3":"0914 101 000 045"
+    "FIELD3":"0914 101 000 045",
+    "FIELD4":"undemian@gmail.com"
   },
   {
     "FIELD1":"Andrei Laza",
     "FIELD2":"Developer",
-    "FIELD3":"0914 101 000 046"
+    "FIELD3":"0914 101 000 046",
+    "FIELD4":"andrei.dan.laza@gmail.com"
   },
   {
     "FIELD1":"Andrei Pfeiffer",
@@ -512,7 +514,8 @@
   {
     "FIELD1":"Claudiu Filip",
     "FIELD2":"Developer",
-    "FIELD3":"0415 200 000 113"
+    "FIELD3":"0415 200 000 113",
+    "FIELD4":"kamikaz3_89@yahoo.com"
   },
   {
     "FIELD1":"Cosmin Mitroi",
