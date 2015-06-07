@@ -115,6 +115,7 @@ angular.module('activities').controller('ActivitiesController', [
         var editAction = '';
         var removeAction = '';
         var action = '';
+        var image = '';
 
         angular.forEach(items, function(value, key) {
           action = '<div class="pull-left">';
@@ -122,11 +123,16 @@ angular.module('activities').controller('ActivitiesController', [
           editAction   = '<a style="display:inline; margin-right: 2px;" class="btn btn-primary" href="' + editRoute + '"><i class="fa fa-edit"></i></a>';
           action += editAction + '</div>';
           
+          if (value.image) {            
+            image += '<img height="60" width="60" src="' + value.image + '"/>';
+          }
+
           data[key] = [
             '<a href="#!/activities/' + value._id + '">' + value.name + '</a>',
             value.actionLabel, 
             value.points,
             value.description,
+            image,
             action
           ];
         });

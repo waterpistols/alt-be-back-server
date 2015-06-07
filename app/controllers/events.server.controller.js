@@ -86,10 +86,10 @@ exports.go = function(req, res) {
 exports.create = function(req, res) {
 	var event = new Event(req.body);
 	event.user = req.user;
-
+	
 	event.save(function(err) {
 		if (err) {
-			return res.status(400).send({
+			return res.status(400).send({				
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
