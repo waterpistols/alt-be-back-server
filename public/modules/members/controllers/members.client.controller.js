@@ -87,6 +87,8 @@ angular.module('members').controller('MembersController', [
           data[key] = [
             '<a href="#!/members/' + value._id + '">' + value.name + '</a>',
             value.email,
+            value.profession,
+            value.cardNumber,
             value.phone,
             action
           ];

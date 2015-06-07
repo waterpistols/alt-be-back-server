@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	node_xj = require("xls-to-json"),
 	errorHandler = require('./errors.server.controller'),
 	Member = mongoose.model('Member'),
 	_ = require('lodash');
@@ -125,6 +126,8 @@ exports.delete = function(req, res) {
  * List of members
  */
 exports.list = function(req, res) {
+	// node_xj
+	
 	Member.find().sort('-created').populate('user', 'displayName').exec(function(err, members) {
 		if (err) {
 			return res.status(400).send({

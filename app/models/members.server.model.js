@@ -41,6 +41,12 @@ var MemberSchema = new Schema({
 	phone: {
 		type: String
 	},
+	profession: {
+		type: String
+	},
+	cardNumber: {
+		type: String
+	},
 	firstLogin: {
 		type: Boolean,
 		default: true

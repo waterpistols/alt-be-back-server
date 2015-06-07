@@ -17,6 +17,24 @@
 </fieldset>
 
 <fieldset>
+	<div class="form-group" ng-class="{ 'has-error': memberForm.profession.$dirty && memberForm.profession.$invalid }">
+		<label class="col-sm-2 control-label">Profession</label>
+	   	<div class="col-sm-10">
+	      	<input name="profession" type="text" data-ng-model="member.profession" id="profession" class="form-control" placeholder="Profession" ng-required="true" ng-disabled="viewPage">
+	   	</div>
+	</div>
+</fieldset>
+
+<fieldset>
+	<div class="form-group" ng-class="{ 'has-error': memberForm.cardNumber.$dirty && memberForm.cardNumber.$invalid }">
+		<label class="col-sm-2 control-label">Card Number</label>
+	   	<div class="col-sm-10">
+	      	<input name="cardNumber" type="text" data-ng-model="member.cardNumber" id="cardNumber" class="form-control" placeholder="Card Number" ng-required="true" ng-disabled="viewPage">
+	   	</div>
+	</div>
+</fieldset>
+
+<fieldset>
 	<div class="form-group" ng-class="{ 'has-error': memberForm.email.$dirty && memberForm.email.$invalid }">
 		<label class="col-sm-2 control-label">Email</label>
 	   	<div class="col-sm-10">
