@@ -14,20 +14,36 @@ var MemberSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	title: {
+	accessKey: {
+		type: String,
+		required: 'accessKey cannot be blank'
+	},
+	type: {
+		type: String
+	},
+	email: {
+		type: String,
+		required: 'email cannot be blank'
+	},
+	externalId: {
+		type: String,
+		required: 'externalId cannot be blank'
+	},
+	avatar: {
+		type: String
+	},
+	name: {
 		type: String,
 		default: '',
 		trim: true,
-		required: 'Title cannot be blank'
+		required: 'Name cannot be blank'
 	},
-	content: {
-		type: String,
-		default: '',
-		trim: true
+	phone: {
+		type: String
 	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
+	firstLogin: {
+		type: Boolean,
+		default: true
 	}
 });
 

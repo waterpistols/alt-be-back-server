@@ -1,55 +1,51 @@
 'use strict';
 
-angular.module('setting').controller('SettingController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', 'Setting',
-  function($scope, $stateParams, $location, $timeout, Authentication, Setting) {
+angular.module('setting').controller('SettingController', [
+  '$scope', 
+  '$state',
+  '$stateParams', 
+  '$timeout', 
+  'Authentication', 
+  'Setting',
+  function($scope, $state, $stateParams, $location, $timeout, Authentication, Setting) {
     $scope.authentication = Authentication;
 
+    // Create
+    $scope.setting = new Setting();
+
     $scope.create = function() {
-      var setting = new Setting({
-        label: this.label,
-        value: this.value,
-        
-      });
-      setting.$save(function(response) {
-        $location.path('setting');
-
-        $scope.label = '';
-        $scope.value = '';
-        
+      $scope.setting.$save(function(response) {
+        $state.go('app.listSetting');
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });
     };
 
-    $scope.remove = function(setting) {
-      if (setting) {
-        setting.$remove();
-
-        for (var i in $scope.setting) {
-          if ($scope.setting[i] === setting) {
-            $scope.setting.splice(i, 1);
-          }
-        }
-      } else {
-        $scope.setting.$remove(function() {
-          $location.path('setting');
-        });
-      }
+    // Remove
+    $scope.remove = function() {
+      $scope.setting.$remove(function() {
+        $state.go('app.listSetting');
+      });
     };
-
+    
+    // Update
     $scope.update = function() {
-      var setting = $scope.setting;
-
-      setting.$update(function() {
-        $location.path('setting/' + setting._id);
+      $scope.setting.$update(function() {
+        $state.go('app.viewSetting', { settingId: $scope.setting._id})
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });
     };
 
-    $scope.findOne = function() {
-      $scope.setting = Setting.get({
+    $scope.findOne = function(disabled) {
+      if(typeof(disabled) !== 'undefined') {
+        $scope.viewPage = true;
+      }
+
+      Setting.get({
         settingId: $stateParams.settingId
+      }, function(response) {
+        $scope.setting = response;
       });
     };
 
@@ -65,7 +61,7 @@ angular.module('setting').controller('SettingController', ['$scope', '$statePara
         // Text translation options
         // Note the required keywords between underscores (e.g _MENU_)
         oLanguage: {
-          sSearch:      'Search all columns:',
+          sSearch:      'Search:',
           sLengthMenu:  '_MENU_ records per page',
           info:         'Showing page _PAGE_ of _PAGES_',
           zeroRecords:  'Nothing found - sorry',
@@ -85,9 +81,12 @@ angular.module('setting').controller('SettingController', ['$scope', '$statePara
           action = '<div class="pull-left">';
           editRoute    = '#!/setting/' + value._id + '/edit';
           editAction   = '<a style="display:inline; margin-right: 2px;" class="btn btn-primary" href="' + editRoute + '"><i class="fa fa-edit"></i></a>';
-          removeAction = '<a style="display:inline" class="btn btn-danger" data-ng-click="remove();"><i class="fa fa-trash"></i></a>';
-          action += editAction + removeAction + '</div>';
-          data[key]    = [value.label, value.value, action];
+          action += editAction + '</div>';
+          data[key] = [
+            '<a href="#!/activities/' + value._id + '">' + value.label + '</a>',
+            value.value, 
+            action
+          ];
         });
         
         if (data.length) {

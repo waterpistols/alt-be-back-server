@@ -5,8 +5,60 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	Member = mongoose.model('User'),
+	Member = mongoose.model('Member'),
 	_ = require('lodash');
+
+exports.check = function(req, res) {
+	
+	// Autologin
+	if(typeof(req.body.type) === 'undefined') {
+		Member.findOne({ accessKey: req.body.accessKey }, function(err, member) {
+		  	if (err) {
+		  		res.json({
+					status: false,
+					data: 'Failed to load member:' + err
+				});
+		  	} else {
+		  		res.json({
+					status: true,
+					data: member
+				});	
+		  	}
+		});
+
+	// Login
+	} else {
+		// Check if exists
+		var update = {
+			'accessKey': req.body.accessKey,
+			'type': req.body.type,
+			'externalId': req.body.externalId,
+			'avatar': req.body.avatar,
+			'firstLogin': false
+		}
+
+		Member.findOneAndUpdate({ 'email': req.body.email }, update, { new: false }, function(err, member) {
+		  	if (err) {
+		  		res.json({
+					status: false,
+					data: 'Failed to load member:' + err
+				});
+		  	} else {
+		  		if ( !member) {
+					res.json({
+						status: false,
+						data: 'You need an invite in order to login.'
+					});
+				} else {
+					res.json({
+						status: true,
+						data: member
+					});
+				}	
+		  	}
+		});
+	}
+}
 
 /**
  * Create a member
