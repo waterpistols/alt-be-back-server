@@ -12,6 +12,8 @@ module.exports = function(app) {
 		.get(members.list)
 		// .post(users.requiresLogin, members.create);
 		.post(members.create);
+	app.route('/members/import')
+		.get(members.import);
 
 	app.route('/members/check')
 		.post(members.check);
@@ -20,10 +22,7 @@ module.exports = function(app) {
 		.get(members.read)
 		// .put(users.requiresLogin, members.hasAuthorization, members.update)
 		.put(members.update)
-		.delete(users.requiresLogin, members.hasAuthorization, members.delete);
-
-	app.route('/members/import')
-		.post(members.import);
+		.delete(users.requiresLogin, members.hasAuthorization, members.delete);	
 
 	// Finish by binding the member middleware
 	app.param('memberId', members.memberByID);

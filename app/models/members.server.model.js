@@ -23,7 +23,8 @@ var MemberSchema = new Schema({
 	},
 	email: {
 		type: String,
-		required: 'email cannot be blank'
+		default: '',
+		// required: 'email cannot be blank'
 	},
 	externalId: {
 		type: String,
@@ -39,13 +40,16 @@ var MemberSchema = new Schema({
 		required: 'Name cannot be blank'
 	},	
 	phone: {
-		type: String
+		type: String,
+		default: '',
 	},
 	profession: {
-		type: String
+		type: String,
+		default: '',
 	},
 	cardNumber: {
-		type: String
+		type: String,
+		default: '',
 	},
 	firstLogin: {
 		type: Boolean,

@@ -3,8 +3,8 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-	node_xj = require("xls-to-json"),
+var mongoose = require('mongoose'),	
+	fs = require("fs"),
 	errorHandler = require('./errors.server.controller'),
 	Member = mongoose.model('Member'),
 	_ = require('lodash');
@@ -125,9 +125,8 @@ exports.delete = function(req, res) {
 /**
  * List of members
  */
-exports.list = function(req, res) {
-	// node_xj
-	
+exports.list = function(req, res) {	
+
 	Member.find().sort('-created').populate('user', 'displayName').exec(function(err, members) {
 		if (err) {
 			return res.status(400).send({
@@ -136,6 +135,40 @@ exports.list = function(req, res) {
 		} else {
 			res.json(members);
 		}
+	});
+};
+
+exports.import = function(req, res) {	
+	var path = __dirname + '/members.json';
+	
+	fs.readFile(path, 'utf8', function (err, data) {
+	    
+	    var json = JSON.parse(data);
+    	
+	    for (var i = 0; i < json.length; i++) {
+
+	    	var obj = json[i];
+	    	
+	        var memberObj = {
+	        	'name' : obj.FIELD1,
+	        	'profession' : obj.FIELD2,
+	        	'cardNumber' : obj.FIELD3,
+	        };
+
+	        var member = new Member(memberObj);
+
+	        
+	        member.save(function(err) {
+				if (err) {
+					// return res.status(400).send({
+					// 	message: errorHandler.getErrorMessage(err)
+					// });
+	        		console.log(errorHandler.getErrorMessage(err));
+				} else {
+					console.log('OK');
+				}
+			});
+	    }
 	});
 };
 
@@ -161,12 +194,4 @@ exports.hasAuthorization = function(req, res, next) {
 		});
 	}
 	next();
-};
-
-/**
- * Member import middleware
- */
-exports.import = function(req, res, next) {
-	
-	res.json({'msg':'da'});
 };
