@@ -107,3 +107,8 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+exports.upload = function(req, res, next) {
+	console.log(req);
+	console.log(res);
+};

@@ -13,9 +13,9 @@ angular.module('events').controller('EventsController', [
     
     $scope.authentication = Authentication;
 
-    // $scope.uploader = new FileUploader({
-    //     url: 'server/upload.php'
-    // });
+    $scope.uploader = new FileUploader({
+        url: 'events/' + $stateParams.eventId + '/upload'
+    });
 
     // Create
     $scope.event = new Events({
@@ -113,6 +113,7 @@ angular.module('events').controller('EventsController', [
       });
       
       $scope.events = Events.query(function(items) {
+        console.log(items);
         var data       = [];
         var editRoute  = '';
         var editAction = '';
