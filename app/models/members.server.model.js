@@ -16,7 +16,7 @@ var MemberSchema = new Schema({
 	},
 	accessKey: {
 		type: String,
-		required: 'accessKey cannot be blank'
+		// required: 'accessKey cannot be blank'
 	},
 	type: {
 		type: String
@@ -27,7 +27,7 @@ var MemberSchema = new Schema({
 	},
 	externalId: {
 		type: String,
-		required: 'externalId cannot be blank'
+		// required: 'externalId cannot be blank'
 	},
 	avatar: {
 		type: String
@@ -37,7 +37,7 @@ var MemberSchema = new Schema({
 		default: '',
 		trim: true,
 		required: 'Name cannot be blank'
-	},
+	},	
 	phone: {
 		type: String
 	},

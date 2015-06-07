@@ -8,19 +8,10 @@
 </div>
 
 <fieldset>
-	<div class="form-group" ng-class="{ 'has-error': memberForm.firstName.$dirty && memberForm.firstName.$invalid }">
-		<label class="col-sm-2 control-label">First Name</label>
+	<div class="form-group" ng-class="{ 'has-error': memberForm.name.$dirty && memberForm.name.$invalid }">
+		<label class="col-sm-2 control-label">Name</label>
 	   	<div class="col-sm-10">
-	      	<input name="firstName" type="text" data-ng-model="member.firstName" id="firstName" class="form-control" placeholder="Name" ng-required="true" ng-disabled="viewPage">
-	   	</div>
-	</div>
-</fieldset>
-
-<fieldset>
-	<div class="form-group" ng-class="{ 'has-error': memberForm.lastName.$dirty && memberForm.lastName.$invalid }">
-		<label class="col-sm-2 control-label">Last Name</label>
-	   	<div class="col-sm-10">
-	      	<input name="lastName" type="text" data-ng-model="member.lastName" id="lastName" class="form-control" placeholder="Name" ng-required="true" ng-disabled="viewPage">
+	      	<input name="name" type="text" data-ng-model="member.name" id="name" class="form-control" placeholder="Name" ng-required="true" ng-disabled="viewPage">
 	   	</div>
 	</div>
 </fieldset>
@@ -30,6 +21,15 @@
 		<label class="col-sm-2 control-label">Email</label>
 	   	<div class="col-sm-10">
 	      	<input name="email" type="text" data-ng-model="member.email" id="email" class="form-control" placeholder="example@domain.com" ng-required="true" ng-disabled="viewPage">
+	   	</div>
+	</div>
+</fieldset>
+
+<fieldset>
+	<div class="form-group" ng-class="{ 'has-error': memberForm.phone.$dirty && memberForm.phone.$invalid }">
+		<label class="col-sm-2 control-label">Phone</label>
+	   	<div class="col-sm-10">
+	      	<input name="phone" type="text" data-ng-model="member.phone" id="phone" class="form-control" placeholder="Phone" ng-required="true" ng-disabled="viewPage">
 	   	</div>
 	</div>
 </fieldset>
