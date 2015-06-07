@@ -23,9 +23,6 @@ module.exports = function(app) {
 	app.route('/events/comment')
 		.post(events.postComment);
 
-	app.route('/events/checkin')
-		.post(events.checkin);
-
 	app.route('/events/go')
 		.post(events.go);
 

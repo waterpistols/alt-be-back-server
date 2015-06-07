@@ -83,7 +83,7 @@ angular.module('events').controller('EventsController', [
         $scope.endDate = moment(response.endDate).format('DD/MM/YYYY HH:MM');
 
         $scope.qrOptions = {
-          data: $scope.event._id,
+          data: 'event-' + $scope.event._id,
           version: 2,
           errorCorrectionLevel: 'M',
           size: 200 // px size

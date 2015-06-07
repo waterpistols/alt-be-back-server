@@ -44,6 +44,10 @@ var MemberSchema = new Schema({
 	firstLogin: {
 		type: Boolean,
 		default: true
+	},
+	points: {
+		type: Number,
+		default: 0
 	}
 });
 

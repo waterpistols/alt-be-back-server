@@ -56,40 +56,6 @@ exports.postComment = function(req, res) {
 	});
 }
 
-exports.checkin = function(req, res) {
-
-	// getMember(req.body.memberId, function(member) {
-	Event.findById(req.body.eventId).exec(function(err, event) {
-		if (err) {
-			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
-		}
-
-		event.checkins.push(req.body.memberId);
-		event.save();
-
-		var action = new Action({
-			category: 'event',
-			action: {
-				id: event._id,
-				title: event.title,
-				label: 'just checked in at'
-			},
-			user: req.body.memberId
-		});
-
-		action.save(function(err) {
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else {
-				res.json(event);
-			}
-		});
-	});
-	// });
-};
-
 exports.go = function(req, res) {
 
 	// getMember(req.body.memberId, function(member) {

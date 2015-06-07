@@ -2,24 +2,25 @@
 
 module.exports = function(app) {
 	// Root routing
-	var core = require('../../app/controllers/core.server.controller'),
-		feed = require('../../app/controllers/feed.server.controller');
+	var core = require('../../app/controllers/core.server.controller');
 
 	app.route('/').get(core.index);
 
-	app.route('/feed')
-		.get(feed.all);
-
+	// Posts
 	app.route('/post')
-		.post(feed.postAdd);
+		.post(core.postAdd);
 
 	app.route('/post/:postId')
-		.get(feed.postDetail);
+		.get(core.postDetail);
 
 	app.route('/post/comment')
-		.post(feed.postComment);
+		.post(core.postComment);
 	
-
 	// Finish by binding the event middleware
-	app.param('postId', feed.postById);
+	app.param('postId', core.postById);
+
+	// Scan 
+	app.route('/checkin')
+		.post(core.checkin);
+
 };
