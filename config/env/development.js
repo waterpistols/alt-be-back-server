@@ -2,7 +2,7 @@
 
 module.exports = {
 	db: {
-		host: 'localhost',
+		host: '10.10.10.163',
         port: '27017',
         db: 'alt-db'
 	},
