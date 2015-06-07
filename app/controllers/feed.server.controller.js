@@ -49,12 +49,35 @@ exports.dailyChart = function(req, res) {
 			entries.forEach(function(item) {
 				var day = weekday[item.date.getDay()];
 				result[day]++;
-				total++;				
+				total++;
 			});
 
 			result.total = total;
 
 			res.json(result);
+		}
+	});
+};
+
+exports.popularActivity = function(req, res) {
+	Action.find({category: 'activity'}).populate('user').sort("-date").exec(function(err, entries) {
+		if (err) {
+			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+		} else {
+			var activities = {};
+			var total = 0;
+			entries.forEach(function(item) {
+				activities[item.action.label] = 0;
+			});
+
+			entries.forEach(function(item) {
+				activities[item.action.label]++;
+				total++;
+			});
+
+			activities.total = total;
+
+			res.json(activities);
 		}
 	});
 };

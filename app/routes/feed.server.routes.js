@@ -9,4 +9,7 @@ module.exports = function(app) {
 
 	app.route('/daily-chart')
 		.get(feed.dailyChart);
+
+	app.route('/popular-activity')
+		.get(feed.popularActivity);
 };
