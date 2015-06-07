@@ -22,7 +22,7 @@ module.exports = function(app) {
 		.get(members.read)
 		// .put(users.requiresLogin, members.hasAuthorization, members.update)
 		.put(members.update)
-		.delete(users.requiresLogin, members.hasAuthorization, members.delete);	
+		.delete(members.delete);	
 
 	// Finish by binding the member middleware
 	app.param('memberId', members.memberByID);
