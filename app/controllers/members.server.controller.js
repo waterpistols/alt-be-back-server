@@ -161,6 +161,7 @@ exports.import = function(req, res) {
 			
 	        var member = new Member(memberObj);
 
+	        console.log(i);
 	        
 	        member.save(function(err) {
 				if (err) {
@@ -169,7 +170,7 @@ exports.import = function(req, res) {
 					// });
 	        		console.log(errorHandler.getErrorMessage(err));
 				} else {
-					console.log('OK');
+					console.log(i + 'OK');
 				}
 			});
 	    }

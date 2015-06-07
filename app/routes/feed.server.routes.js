@@ -6,4 +6,7 @@ module.exports = function(app) {
 
 	app.route('/feed')
 		.get(feed.all);
+
+	app.route('/daily-chart')
+		.get(feed.dailyChart);
 };
