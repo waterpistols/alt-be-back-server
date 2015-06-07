@@ -28,7 +28,7 @@ angular.module('events').controller('EventsController', [
       attending: [],
       checkins: []
     });
-    
+
     $scope.isCreate = false;
 
     if ($state.current.url === '/events/create') {
@@ -137,7 +137,7 @@ angular.module('events').controller('EventsController', [
           editAction   = '<a style="display:inline; margin-right: 2px;" class="btn btn-primary" href="' + editRoute + '"><i class="fa fa-edit"></i></a>';
           action += editAction + '</div>';
           if (value.image) {            
-            image += '<img height="60" width="60" src="' + value.image + '"/>';
+            image = '<img height="60" width="60" src="' + value.image + '"/>';
           }
 
           data[key] = [
