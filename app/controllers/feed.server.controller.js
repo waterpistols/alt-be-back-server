@@ -87,7 +87,7 @@ exports.eventsChart = function(req, res) {
 		if (err) {
 			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 		} else {
-			var events = {};
+			var events = [];
 			var total = 0;
 
 			entries.forEach(function(item) {
