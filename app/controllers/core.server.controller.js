@@ -118,14 +118,15 @@ exports.checkin = function(req, res) {
 };
 
 exports.rank = function(req, res) {
-	Member.find({}).sort("-points").exec(function(err, top) {
+	Member.find({}).sort("-points").exec(function(err, entries) {
 		if (err) {
 			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 		} else {
-
-			// Get settings
-
-			res.json(entries);
+			res.json({
+				// Get settings
+				prize: '2 Tickets to Instambul',
+				top: entries
+			});
 		}
 	});
 };
