@@ -135,7 +135,7 @@ exports.postAdd = function(req, res) {
 
 		var post = new Post({
 			message: req.body.message,
-			user: member
+			user: req.body.memberId
 		});
 
 		post.save(function(err) {
@@ -186,7 +186,7 @@ exports.postComment = function(req, res) {
 			date: new Date()
 		};
 
-		Post.findById(req.body.postId).exec(function(err, post) {
+		Post.findById(req.body.postId).populate('user').exec(function(err, post) {
 			if (err) {
 				return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 			}
@@ -197,7 +197,6 @@ exports.postComment = function(req, res) {
 			res.json(post);
 		});
 	});
-	
 };
 
 exports.postById = function(req, res, next, id) {

@@ -32,7 +32,7 @@ exports.postComment = function(req, res) {
 			date: new Date()
 		};
 
-		Event.findById(req.body.eventId).exec(function(err, event) {
+		Event.findById(req.body.eventId).populate('user').exec(function(err, event) {
 			if (err) {
 				return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 			}
@@ -161,7 +161,7 @@ exports.list = function(req, res) {
  * Event middleware
  */
 exports.eventByID = function(req, res, next, id) {
-	Event.findById(id).exec(function(err, event) {
+	Event.findById(id).populate('user').exec(function(err, event) {
 		if (err) return next(err);
 		if (!event) return next(new Error('Failed to load event ' + id));
 		req.event = event;

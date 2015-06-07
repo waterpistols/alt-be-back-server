@@ -20,8 +20,7 @@ var PostSchema = new Schema({
 		ref: 'Member'
 	},
 	comments: [{
-		type: Schema.ObjectId,
-		ref: 'Comment'
+		type: Schema.Types.Mixed
 	}]
 });
 
