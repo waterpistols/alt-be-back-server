@@ -13,7 +13,7 @@ var init = require('./config/init')(),
  */
 
 // Bootstrap db connection
-var db = mongoose.connect('mongodb://' + config.db.username + ':' + config.db.password + '@' + config.db.host + ':' + config.db.port + '/' + config.db.db, function(err) {
+var db = mongoose.connect('mongodb://' + config.db.host + ':' + config.db.port + '/' + config.db.db, function(err) {
 	if (err) {
 		console.error(chalk.red('Could not connect to MongoDB!'));
 		console.log(chalk.red(err));

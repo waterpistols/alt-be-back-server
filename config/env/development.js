@@ -2,13 +2,9 @@
 
 module.exports = {
 	db: {
-		host: 'ds063899.mongolab.com',
-        port: '63899',
-        db: 'alt-db',
-
-        // Basic authentication (optional)
-        username: 'altuser',
-        password: 'altpass'
+		host: 'localhost',
+        port: '27017',
+        db: 'alt-db'
 	},
 	app: {
 		title: 'Angle - Development Environment'
