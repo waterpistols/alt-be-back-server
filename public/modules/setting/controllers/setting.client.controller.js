@@ -7,11 +7,11 @@ angular.module('setting').controller('SettingController', [
   '$timeout', 
   'Authentication', 
   'Setting',
-  function($scope, $state, $stateParams, $location, $timeout, Authentication, Setting) {
+  function($scope, $state, $stateParams, $timeout, Authentication, Setting) {
     $scope.authentication = Authentication;
 
     // Create
-    // $scope.setting = new Setting();
+    $scope.setting = new Setting();
 
     $scope.create = function() {
       $scope.setting.$save(function(response) {
@@ -45,6 +45,7 @@ angular.module('setting').controller('SettingController', [
       Setting.get({
         settingId: $stateParams.settingId
       }, function(response) {
+        console.log(response)
         $scope.setting = response;
       });
     };
@@ -70,7 +71,7 @@ angular.module('setting').controller('SettingController', [
         }
       });
       
-      $scope.setting = Setting.query(function(items) {        
+      $scope.settings = Setting.query(function(items) {        
         var data       = [];
         var editRoute  = '';
         var editAction = '';
@@ -83,7 +84,7 @@ angular.module('setting').controller('SettingController', [
           editAction   = '<a style="display:inline; margin-right: 2px;" class="btn btn-primary" href="' + editRoute + '"><i class="fa fa-edit"></i></a>';
           action += editAction + '</div>';
           data[key] = [
-            '<a href="#!/activities/' + value._id + '">' + value.label + '</a>',
+            '<a href="#!/setting/' + value._id + '">' + value.label + '</a>',
             value.value, 
             action
           ];

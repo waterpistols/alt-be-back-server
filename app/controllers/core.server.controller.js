@@ -12,6 +12,7 @@ var mongoose = require('mongoose'),
 	Comment = mongoose.model('Comment'),
 	Activity = mongoose.model('Activity'),
 	Member = mongoose.model('Member'),
+	Setting = mongoose.model('Setting'),
 	Event = mongoose.model('Event');
 
 // Frontend
@@ -118,15 +119,17 @@ exports.checkin = function(req, res) {
 };
 
 exports.rank = function(req, res) {
-	Member.find({}).sort("-points").exec(function(err, top) {
+	Member.find({}).sort("-points").exec(function(err, entries) {
 		if (err) {
 			return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
-		} else {
-
-			// Get settings
-
-			res.json(entries);
-		}
+		} 
+		// Get settings
+		Setting.findOne({ label: 'Prize' }).exec(function(err, response) {
+			res.json({
+				prize: response.value,
+				top: entries
+			});	
+		});
 	});
 };
 
