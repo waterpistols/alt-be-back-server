@@ -22,7 +22,7 @@ exports.checkin = function(req, res) {
 	var model = payload[0];
 	var entryId = payload[1];
 
-	if(model === 'event') {
+	if(model === 'e') {
 		Event.findById(entryId).exec(function(err, event) {
 			if (err) {
 				return res.status(400).send({ message: errorHandler.getErrorMessage(err) });

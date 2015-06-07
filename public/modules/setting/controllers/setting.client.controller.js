@@ -11,7 +11,7 @@ angular.module('setting').controller('SettingController', [
     $scope.authentication = Authentication;
 
     // Create
-    $scope.setting = new Setting();
+    // $scope.setting = new Setting();
 
     $scope.create = function() {
       $scope.setting.$save(function(response) {

@@ -73,7 +73,7 @@ angular.module('activities').controller('ActivitiesController', [
       }, function(response) {
         $scope.activity = response;
         $scope.qrOptions = {
-          data: 'activity-' + $scope.activity._id,
+          data: 'a-' + $scope.activity._id,
           version: 2,
           errorCorrectionLevel: 'M',
           size: 200 // px size
