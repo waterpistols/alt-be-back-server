@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Setting = mongoose.model('Setting'),
+	Action = mongoose.model('Action'),
 	_ = require('lodash');
 
 /**
@@ -21,7 +22,24 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(setting);
+			if(req.body.label == 'Announcement') {
+				var action = new Action({
+					category: 'announcement',
+					action: {
+						id: setting._id,
+						title: setting.value,
+						label: ''
+					},
+					user: req.body.memberId
+				});
+
+				action.save(function(err) {
+					if (err) {
+						return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
+					}
+					res.json(setting);
+				});
+			}
 		}
 	});
 };
