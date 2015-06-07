@@ -8,6 +8,7 @@ angular.module('dashboard').config(['$stateProvider',
 			state('app.dashboard', {
 				url: '/dashboard',
 				templateUrl: 'modules/dashboard/views/dashboard.client.view.html',
+				controller: 'DashboardController',
 				authenticate: true
 			});
 	}

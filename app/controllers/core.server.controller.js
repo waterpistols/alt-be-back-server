@@ -27,10 +27,13 @@ exports.checkin = function(req, res) {
 		res.json({ 'error': 'well cock' });
 	} else {
 		if(model === 'e') {
+			console.log(req.body)
 			Event.findById(entryId).exec(function(err, event) {
 				if (err) {
 					return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 				}
+
+				console.log(event)
 
 				event.checkins.push(req.body.memberId);
 				event.save();
@@ -50,7 +53,10 @@ exports.checkin = function(req, res) {
 						return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 					}
 
+					console.log(action)
+
 					Member.findById(req.body.memberId).exec(function(err, member) {
+						console.log(member)
 						if (err) {
 							return res.status(400).send({ message: errorHandler.getErrorMessage(err) });
 						}
